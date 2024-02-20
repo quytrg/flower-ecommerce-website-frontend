@@ -47,6 +47,7 @@
   .dark {
     color: $white;
     background-color: $black;
+    border: 1px solid $black;
   }
 
   .dark:hover {

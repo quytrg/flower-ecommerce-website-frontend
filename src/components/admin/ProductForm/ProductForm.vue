@@ -1,6 +1,6 @@
 <template>
-  <div class="product-form fluid-container mx-4">
-    <h4 class="page-title my-3 d-flex align-items-center">
+  <div class="product-form fluid-container mx-5">
+    <h4 class="page-title mt-4 mb-0 d-flex align-items-center">
       <h4 class="gray-text">eCommerce</h4>
       <h5 class="mx-1">/</h5> 
       <h4 class="primary-text">{{ pageTitle }}</h4>

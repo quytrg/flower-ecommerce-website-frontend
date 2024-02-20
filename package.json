@@ -19,6 +19,7 @@
     "vue-multiselect": "^3.0.0-beta.3",
     "vue-router": "^4.2.5",
     "vue-sidebar-menu-akahon": "^1.0.2",
+    "vuetify": "^3.5.4",
     "yup": "^1.3.2"
   },
   "devDependencies": {

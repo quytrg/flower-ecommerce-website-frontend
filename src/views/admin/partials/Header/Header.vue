@@ -1,6 +1,6 @@
 <template>
   <div class="header-wrapper fluid-container d-flex">
-    <h4 class="py-sm-4 py-3 my-0">{{ extractTitle }}</h4>
+    <h4 class="py-sm-4 py-3 my-0">{{ }}</h4>
     <div class="dropdown py-sm-4 py-3 mt-sm-auto ms-auto flex-shrink-1 me-2">
       <a
         href="#"
@@ -42,18 +42,7 @@ export default {
       type: String,
       default: "Dashboard",
     },
-  },
-  computed: {
-    extractTitle() {
-      const path = this.$route.path
-      const lastIndex = path.lastIndexOf("/");
-      let result = path.substring(lastIndex + 1);
-      if (result === 'admin') {
-        result = 'dashboard'
-      }
-      return result
-    }
-  },
+  }
 };
 </script>
 

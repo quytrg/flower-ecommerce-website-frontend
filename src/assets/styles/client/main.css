@@ -88,5 +88,6 @@
 
   input {
     color: black !important;
+    border: 1px solid black !important;
   }
 }

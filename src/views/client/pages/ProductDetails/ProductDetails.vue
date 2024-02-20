@@ -21,9 +21,11 @@
       </div>
       <div class="product-content__quantity">
           <h5>Quantity:</h5>
-          <button @click="handleDecreaseQuantity">-</button>
-          <input type="text" v-model="quantity"/>
-          <button @click="handleIncreaseQuantity">+</button>
+          <div class="d-flex align-items-center">
+            <button @click="handleDecreaseQuantity">-</button>
+            <input type="text" v-model="quantity"/>
+            <button @click="handleIncreaseQuantity">+</button>
+          </div>
       </div>
       <Button textContent="ADD TO BASKET" type="dark" :fullWidth="true"/>
     </div>
@@ -105,9 +107,9 @@
           width: 4.3vw;
           height: 3.5vw;
           text-align: center;
-          border: 1px solid #a4a4a4;
-          border-left: none;
-          border-right: none;
+          border: 1px solid #a4a4a4 !important;
+          border-left: none !important;
+          border-right: none !important;
         }
 
         button {

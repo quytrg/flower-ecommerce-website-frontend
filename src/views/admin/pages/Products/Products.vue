@@ -1,6 +1,6 @@
 <template>
-  <div class="product fluid-container mx-4">
-    <div class="product-title my-3 d-flex align-items-center">
+  <div class="product fluid-container mx-5">
+    <div class="product-title my-4 d-flex align-items-center">
       <h4 class="gray-text">eCommerce</h4>
       <h5 class="mx-1">/</h5> 
       <h4 class="primary-text">Product List</h4>
@@ -146,6 +146,21 @@
         </table>
       </div>
     </div>
+    <div class="text-center">
+      <v-container>
+        <v-row justify="center">
+          <v-col cols="8">
+            <v-container class="max-width">
+              <v-pagination
+                v-model="page"
+                class="my-4"
+                :length="15"
+              ></v-pagination>
+            </v-container>
+          </v-col>
+        </v-row>
+      </v-container>
+    </div>
   </div>
 </template>
 
@@ -176,6 +191,7 @@
         },
         checkall: false,
         checkedItems: [],
+        page: 1
       }
     },
     methods: {
