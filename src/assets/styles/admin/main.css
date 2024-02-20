@@ -1,0 +1,190 @@
+@import './base.css';
+
+/* Page title */
+.hr-gray {
+  border: 1px solid rgb(163, 163, 163);
+  opacity: 0.25;
+}
+/* End page title */
+
+/* Placeholder */
+::placeholder {
+  color: #c5c7ca!important;
+}
+/* End placeholder */
+
+
+/* Preview image when uploading */
+.imageuploadify-container {
+  position: relative;
+}
+
+.imageuploadify {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  border-bottom: 1rem;
+  left: 1rem;
+  overflow: hidden;
+  margin-bottom: 1em;
+  margin-top: 0.375rem;
+  margin-right: 0.375rem;
+  float: left;
+  border-radius: 12px;
+  box-shadow: 0 0 2px 0 #888;
+}
+
+.imageuploadify img {
+  height: 100px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+}
+/* End preview image when uploading */
+
+/* Card Bootstrap */
+.card {
+  border: 0;
+  box-shadow: 0 0.25rem 1.125rem rgba(75, 70, 92, 0.1);
+  color: var(--primary-color) !important;
+}
+
+.card-header {
+  background-color: white;
+}
+
+.card-header h5 {
+  font-size: 20px;
+  color: var(--primary-color);
+  font-weight: 400;
+}
+
+.card-title {
+  color: var(--primary-color);
+  font-weight: 500;
+  margin-top: 0.425rem;
+  margin-bottom: 1.245rem;
+}
+/* End card Bootstrap */
+
+/* Button */
+.btn-main {
+  color: white !important;;
+  background-color: #7367f0 !important;
+  border-color: #7367f0 !important; 
+  font-weight: 500;
+}
+
+.btn-main:hover {
+  color: white !important;;
+  background-color: #685dd8 !important;
+  border-color: #685dd8 !important;;
+}
+
+.btn-active {
+  background-color: #dff7e9 !important;
+  color: #28c76f !important;
+  border-color: #dff7e9;
+  font-weight: 500;
+}
+
+.btn-active:hover {
+  border-color: #28c76f !important;
+  background-color: #28c76f !important;
+  color: #dff7e9 !important;
+}
+
+.btn-inactive {
+  background-color: #fce5e6 !important;
+  color: #ea5455 !important;
+  border-color: #fce5e6;
+  font-weight: 500;
+}
+
+.btn-inactive:hover {
+  border-color: #ea5455 !important;
+  background-color: #ea5455 !important;
+  color: white !important;
+}
+/* End button */
+
+/* Icon */
+.icon a {
+  all: initial
+}
+
+.icon i {
+  color: var(--icon-color);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.925rem;
+  border-radius: 5px;
+}
+
+.icon .fa-filter-circle-xmark:hover {
+  color: #ea5455;
+}
+
+.icon .fa-pen-to-square:hover {
+  color: #ff9f43;
+  background-color: #fff1e3;
+}
+
+.icon .fa-trash-can:hover {
+  color: #ea5455;
+  background-color: #fce5e6;
+}
+/* End icon */
+
+/* Primary text */
+.primary-text {
+  color: var(--primary-color);
+}
+/* End primary text */
+
+/* Table */
+.table thead th{
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+.table tbody td {
+  color: var(--primary-color);
+  font-weight: 400;
+}
+
+.table th, td {
+  vertical-align: middle;
+}
+
+.table tbody td input[name="position"] {
+  border: 2px solid var(--border-color);
+  color: var(--primary-color);
+  border-radius: 5px;
+}
+
+.table tbody td input[name="position"]:focus-visible {
+  outline-color: var(--border-color);
+}
+
+.table input[type="checkbox"] {
+  border: 2px solid var(--border-color);
+}
+/* End table */
+
+/* Text body */
+.text-body {
+  color: #6f6b7d !important;
+}
+/* End text body */
+
+/* Select */
+.form-select {
+  color: var(--primary-color);
+}
+/* End select */
+

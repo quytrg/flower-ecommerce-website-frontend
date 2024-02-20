@@ -1,0 +1,25 @@
+:root {
+  --main-color: #11101D;
+  --primary-color: #5d596c;
+  --border-color: rgba(0, 0, 0, 0.175);
+  --icon-color: #7b7884;
+
+
+  --body-font-family: 'Roboto', sans-serif;
+  --main-background-color: #F8F7FA;
+}
+
+/* Body background color */
+body {
+  background-color: var(--main-background-color);
+  color: var(--primary-color);
+}
+/* End body background color */
+
+/* Input */
+input {
+  color: var(--primary-color) !important;
+  font-weight: 500;
+}
+/* End input */
+
