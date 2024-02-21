@@ -129,6 +129,11 @@
   color: #ea5455;
 }
 
+.icon .fa-pen-to-square {
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
+}
+
 .icon .fa-pen-to-square:hover {
   color: #ff9f43;
   background-color: #fff1e3;
@@ -173,6 +178,7 @@
 
 .table input[type="checkbox"] {
   border: 2px solid var(--border-color);
+  margin-top: 0.2rem;
 }
 /* End table */
 

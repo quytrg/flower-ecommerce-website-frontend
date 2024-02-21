@@ -144,22 +144,22 @@
             </tr>
           </tbody>
         </table>
+        <div class="text-center">
+          <v-container>
+            <v-row justify="center">
+              <v-col cols="8">
+                <v-container class="max-width p-0">
+                  <v-pagination
+                    v-model="page"
+                    :length="totalPages"
+                    :total-visible="6"
+                  ></v-pagination>
+                </v-container>
+              </v-col>
+            </v-row>
+          </v-container>
+        </div>
       </div>
-    </div>
-    <div class="text-center">
-      <v-container>
-        <v-row justify="center">
-          <v-col cols="8">
-            <v-container class="max-width">
-              <v-pagination
-                v-model="page"
-                class="my-4"
-                :length="15"
-              ></v-pagination>
-            </v-container>
-          </v-col>
-        </v-row>
-      </v-container>
     </div>
   </div>
 </template>
@@ -191,7 +191,8 @@
         },
         checkall: false,
         checkedItems: [],
-        page: 1
+        page: 1,
+        totalPages: 0
       }
     },
     methods: {
@@ -199,9 +200,14 @@
         const filter = Object.fromEntries(
           Object.entries(this.filter).filter(([key, value]) => value !== '')
         );
-        this.products = await ProductService.get({
-          params: filter
+        const data = await ProductService.get({
+          params: {
+            ...filter,
+            page: this.page
+          }
         })
+        this.products = data.products
+        this.totalPages = data.totalPages
       },
       handleClear() {
         this.filter = {
@@ -282,8 +288,12 @@
       filter: {
         handler() {
           this.getProducts()
+          this.page = 1
         },
         deep: true
+      },
+      page() {
+        this.getProducts()
       }
     }
   }
