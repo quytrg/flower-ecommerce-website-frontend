@@ -10,45 +10,29 @@ class AccountService {
     return (await this.api.get('/', options)).data;
   }
 
-  async changeStatus(id, data) {
-    return (await this.api.patch(`/change-status/${id}`, data)).data
+  async create(formData) {
+    return (await this.api.post('/', formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      }
+    })).data
   }
 
-  // async changeMulti(data) {
-  //   return (await this.api.patch('/change-multi', data)).data
-  // }
-
-  async create(data) {
-    return (await this.api.post('/create', data)).data
-  }
-
-  async getAccountById(id) {
+  async getOne(id) {
     return (await this.api.get(`/${id}`)).data;
   }
 
-  async update(id, data) {
-    return (await this.api.put(`/update/${id}`, data)).data;
+  async update(id, formData) {
+    return (await this.api.patch(`/${id}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      }
+    })).data;
   }
 
   async deleteOne(id) {
     return (await this.api.delete(`/${id}`)).data;
   }
-
-  // async create(data) {
-  //   return (await this.api.post("/", data)).data;
-  // }
-  // async deleteAll() {
-  //   return (await this.api.delete("/")).data;
-  // }
-  // async get(id) {
-  //   return (await this.api.get(`/${id}`)).data;
-  // }
-  // async update(id, data) {
-  //   return (await this.api.put(`/${id}`, data)).data;
-  // }
-  // async delete(id) {
-  //   return (await this.api.delete(`/${id}`)).data;
-  // }
 }
 
 export default new AccountService();

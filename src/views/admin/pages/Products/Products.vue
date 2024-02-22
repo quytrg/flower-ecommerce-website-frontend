@@ -263,6 +263,7 @@
         }
 
         // reset checkbox
+        this.checkall = false
         this.checkedItems = this.products.map(() => false)
       },
 
@@ -300,24 +301,4 @@
 </script>
 
 <style scoped lang="scss">
-  .thumbnail {
-    width: 60px;
-    height: 60px;
-    position: relative;
-    border-bottom: 1rem;
-    overflow: hidden;
-    float: left;
-    box-shadow: 0 0 2px 0 #888;
-    background-color: #eef6f8ea;
-    border-radius: 10px;
-
-    img {
-      height: 60px;
-      left: 50%;
-      position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: auto;
-    }
-  }
 </style>

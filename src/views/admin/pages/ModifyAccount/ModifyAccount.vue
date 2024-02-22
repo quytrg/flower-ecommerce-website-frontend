@@ -1,6 +1,7 @@
 <template>
   <div class="modify-account container mt-3">
     <AccountForm 
+      v-if="account"
       :account="account"
       @submit:account="updateAccount"
     />
@@ -22,13 +23,11 @@
     },
     methods: {
       async getAccount() {
-        this.account = await AccountService.getAccountById(this.$route.params.id)
-        console.log(this.account);
+        this.account = await AccountService.getOne(this.$route.params.id)
       },
       async updateAccount(data) {
         try {
           const result = await AccountService.update(data._id, data)
-          console.log(result);
           this.$router.push({ name: "Accounts" })
         }
         catch(err) {
