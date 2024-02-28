@@ -14,7 +14,7 @@
     "sweetalert2": "^11.10.1",
     "swiper": "^11.0.3",
     "tinymce": "^6.8.2",
-    "vee-validate": "^4.11.8",
+    "vee-validate": "^4.12.5",
     "vue": "^3.3.4",
     "vue-multiselect": "^3.0.0-beta.3",
     "vue-router": "^4.2.5",

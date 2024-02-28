@@ -1,114 +1,182 @@
 <template>
-  <div class="container my-5">
-    <div class="row justify-content-center">
-      <div class="col-4">
-        <h3 class="text-center">Login</h3>
-        <Form @submit="handleSubmit" :validation-schema="accountSchema">
-          <div class="form-group mb-3">
-            <label for="email" class="form-label">Email</label>
-            <Field
-              id="email"
-              name="email"
-              type="email"
-              class="form-control"
-              v-model="account.email"
-            />
-            <ErrorMessage name="email" class="error-feedback text-warning" />
-          </div>
-          <div class="form-group mb-3">
-            <label for="password" class="form-label">Password</label>
-            <Field
-              type="password" 
-              name="password" 
-              id="password"  
-              class="form-control"
-              v-model="account.password"
-            />
-            <ErrorMessage name="password" class="error-feedback text-warning" />
-          </div>
-          <div class="d-grid">
-            <button
-              type="submit"
-              class="btn btn-primary btn-block"
-            >
-              Submit
-            </button>
-          </div>
-          
-        </Form>
+  <div class="container py-5">
+    <div class="row justify-content-center align-items-center">
+      <div class="authentication position-relative col-12 col-md-7 col-sm-10">
+        <div class="authentication-wrapper">
+          <v-form fast-fail validate-on="submit lazy" @submit.prevent="handleSubmit">
+            <div>
+              <v-card
+                class="mx-auto pa-12 pb-8"
+                elevation="8"
+                max-width="448"
+                rounded="lg"
+              >
+                <div class="d-flex justify-content-center align-items-center mb-7 mx-3">
+                  <img 
+                    src="https://res-console.cloudinary.com/dszbsfjzs/media_explorer_thumbnails/3abe8fe14126b2d0d791598a66213c4c/detailed" 
+                    alt="logo"
+                    style="
+                      width: 48px;
+                      aspect-ratio: 1/1;
+                      object-fit: cover;
+                    "
+                  >
+                  <v-card-title class="text-h4 text-grey-darken-2 ps-2">
+                    Kyiv Admin
+                  </v-card-title>
+                </div>
+                <v-text-field
+                  v-model="email"
+                  label="Email"
+                  placeholder="quy2k3@gmail.com"
+                  prepend-inner-icon="mdi-email-outline"
+                  variant="outlined"
+                  color="deep-purple-accent-1"
+                  :rules="emailRules"
+                ></v-text-field>
+
+                <div
+                  class="d-flex align-center justify-end"
+                >
+                  <a
+                    class="text-decoration-none text-deep-purple-accent-1 text-subtitle-1"
+                    href="#"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    Forgot password?
+                  </a>
+                </div>
+
+                <v-text-field
+                  v-model="password"
+                  :append-inner-icon="visible ? 'mdi-eye' : 'mdi-eye-off'" 
+                  :type="visible ? 'text' : 'password'"
+                  label="Password"
+                  placeholder="..............."
+                  prepend-inner-icon="mdi-lock-outline"
+                  variant="outlined"
+                  color="deep-purple-accent-1"
+                  @click:append-inner="visible = !visible"
+                  :rules="passwordRules"
+                ></v-text-field>
+
+                <v-card class="mb-8 mt-3" color="surface-variant" variant="tonal">
+                  <v-card-text class="text-medium-emphasis text-caption">
+                    Warning: After 3 consecutive failed login attempts, you account
+                    will be temporarily locked for three hours. If you must login
+                    now, you can also click "Forgot login password?" below to reset
+                    the login password.
+                  </v-card-text>
+                </v-card>
+
+                <v-btn block class="mb-5" color="deep-purple-accent-1" size="large" variant="elevated" :loading="loading" type="submit">
+                  Log In
+                </v-btn>
+              </v-card>
+            </div>
+          </v-form>
+        </div>
       </div>
     </div>
   </div>
-  
 </template>
 
 <script>
-  import * as yup from "yup";
-  import { Form, Field, ErrorMessage } from "vee-validate";
-  import Swal from 'sweetalert2'
-  import AuthService from '@/services/admin/auth.service'
-  export default {
-    name: "AdminLogin",
-    components: {
-      Form,
-      Field,
-      ErrorMessage,
+import AuthService from "@/services/admin/auth.service";
+
+export default {
+  name: "AdminLogin",
+  components: {
+  },
+  props: {},
+  data: (vm) => {
+    return {
+      email: '',
+      emailRules: [
+        value => {
+          if (value) return true
+          return 'E-mail is requred.'
+        },
+        value => {
+          if (/.+@.+\..+/.test(value)) return true
+          return 'E-mail must be valid.'
+        },
+        value => vm.login(value)
+      ],
+      password: '',
+      passwordRules: [
+        value => {
+          if (value) return true
+          return 'Password is requred.'
+        },
+      ],
+      visible: false,
+      loading: false,
+    };
+  },
+  methods: {
+    async handleSubmit(event) {
+      this.loading = true
+      const response = await event
+      this.loading = false
     },
-    props: {
-    },
-    data() {
-      const accountSchema = yup.object().shape({
-        email: yup
-          .string("Email must be a string")
-          .required("Email must have a value")
-          .email("Invalid email format"),
-        password: yup
-          .string()
-          .required("Password must be provided"),
-      })
-      return {
-        account: {},
-        accountSchema,
+    async login() {
+      try {
+        return new Promise(async (resolve, reject) => {
+          const result = await AuthService.login({
+            email: this.email,
+            password: this.password
+          })
+          .then(res => {
+
+            return resolve(true)
+          })
+          .catch(err => {
+            if (err.response.status === 403) {
+              return resolve("Account is locked")
+            }
+            return resolve("Wrong email or password")
+          })
+        })
       }
-    },
-    methods: {
-      async login(account) {
-        const state = await AuthService.login(account)
-        return state
-      },
-      handleSubmit() {
-        this.login(this.account)
-            .then(state => {
-              if (state === 'EmailNotExist') {
-                Swal.fire({
-                  icon: "error",
-                  title: "Login failed",
-                  text: "Email not exist!",
-                });
-              }
-              else if (state === 'WrongPassword') {
-                Swal.fire({
-                  icon: "error",
-                  title: "Login failed",
-                  text: "Wrong password!",
-                });
-              }
-              else if (state === 'Block') {
-                Swal.fire({
-                  icon: "error",
-                  title: "Login failed",
-                  text: "Account has been blocked!",
-                });
-              }
-              else {
-                this.$router.push({ name: 'Dashboard' })
-              }
-            })
+      catch (err) {
+        console.log(err)
       }
-    },
-  }
+      
+    }
+  },
+};
 </script>
 
 <style scoped lang="scss">
+  .container {
+    height: 100vh;
+    .row {
+      height: 100%;
+    }
+  }
+
+  
+  .authentication-wrapper:before {
+    width: 238px;
+    height: 233px;
+    content: " ";
+    position: absolute;
+    top: -85px;
+    left: 10px;
+    background-image: url(https://res-console.cloudinary.com/dszbsfjzs/media_explorer_thumbnails/c2f212ddacc1fd2871bc935c7902bd7e/detailed);
+  }
+
+  .authentication-wrapper:after {
+    width: 180px;
+    height: 180px;
+    content: " ";
+    position: absolute;
+    z-index: -1;
+    bottom: -70px;
+    right: 30px;
+    background-image: url(https://res-console.cloudinary.com/dszbsfjzs/media_explorer_thumbnails/6afeddee8c33d3e8b093b607996798df/detailed);
+  }
 
 </style>
