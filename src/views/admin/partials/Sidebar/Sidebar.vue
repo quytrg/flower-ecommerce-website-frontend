@@ -4,19 +4,22 @@
     menuTitle="KyivAdmin"
     menuIcon="bxs-florist"
     :menuItems="menuItems"
-    profileName="quytrg"
+    :profileName="account.fullName"
     profileRole="administrator"
-    profileImg="/avatar.jpg"
+    :profileImg="account.avatar"
   />
 </template>
 
 <script>
 import VueSidebarMenuAkahon from "vue-sidebar-menu-akahon";
+import { mapState } from 'pinia'
+import { useAuthStore } from '@/stores/auth.store'
 
 export default {
   name: "Sidebar",
   components: { VueSidebarMenuAkahon },
   data() {
+    const authStore = useAuthStore()
     return {
       menuItems: [
         { link: { name: 'Dashboard' }, name: 'Dashboard', tooltip: 'Dashboard', icon: 'bx-grid-alt' },
@@ -25,9 +28,13 @@ export default {
         { link: { name: 'Dashboard' }, name: 'Orders', tooltip: 'Orders', icon: 'bx-cart-alt' },
         { link: { name: 'Dashboard' }, name: 'File Manager', tooltip: 'File Manager', icon: 'bx-folder' },
         { link: { name: 'Dashboard' }, name: 'Setting', tooltip: 'Setting', icon: 'bx-cog' },
-      ]
+      ],
+      account: authStore.currentAccount
     }
   },
+  computed: {
+    ...mapState(useAuthStore, ['currentAccount'])
+  }
 };
 </script>
 

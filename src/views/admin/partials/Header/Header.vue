@@ -10,13 +10,13 @@
         aria-expanded="false"
       >
         <img
-          src="/avatar.jpg"
+          :src="account.avatar"
           alt="hugenerd"
           width="32"
           height="32"
           class="rounded-circle"
         />
-        <span class="d-none d-sm-inline mx-1">quytrg</span>
+        <span class="d-none d-sm-inline mx-1">{{ account.fullName }}</span>
       </a>
       <ul
         class="dropdown-menu dropdown-menu-dark text-small shadow"
@@ -35,6 +35,9 @@
 </template>
 
 <script>
+import { mapState } from 'pinia'
+import { useAuthStore } from '@/stores/auth.store'
+
 export default {
   name: "Header",
   props: {
@@ -42,6 +45,15 @@ export default {
       type: String,
       default: "Dashboard",
     },
+  },
+  data() {
+    const authStore = useAuthStore()
+    return {
+      account: authStore.currentAccount
+    }
+  },
+  computed: {
+    ...mapState(useAuthStore, ['currentAccount'])
   }
 };
 </script>

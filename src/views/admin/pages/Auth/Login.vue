@@ -84,6 +84,8 @@
 
 <script>
 import AuthService from "@/services/admin/auth.service";
+import { mapState, mapActions } from 'pinia'
+import { useAuthStore } from '@/stores/auth.store'
 
 export default {
   name: "AdminLogin",
@@ -123,16 +125,20 @@ export default {
     },
     async login() {
       try {
+        const authStore = useAuthStore()
+        authStore.loginStart()
         return new Promise(async (resolve, reject) => {
           const result = await AuthService.login({
             email: this.email,
             password: this.password
           })
           .then(res => {
-
+            authStore.loginSuccess(res)
+            this.$router.push({ name: 'Dashboard'})
             return resolve(true)
           })
           .catch(err => {
+            authStore.loginFailed()
             if (err.response.status === 403) {
               return resolve("Account is locked")
             }
@@ -143,9 +149,11 @@ export default {
       catch (err) {
         console.log(err)
       }
-      
-    }
+    },
+    ...mapActions(useAuthStore, ['loginStart', 'loginSuccess', 'loginFailed']),
   },
+  computed: {
+  }
 };
 </script>
 
