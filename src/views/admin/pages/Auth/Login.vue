@@ -165,7 +165,7 @@ export default {
     position: absolute;
     top: -85px;
     left: 10px;
-    background-image: url(https://res-console.cloudinary.com/dszbsfjzs/media_explorer_thumbnails/c2f212ddacc1fd2871bc935c7902bd7e/detailed);
+    background-image: url(https://res.cloudinary.com/dszbsfjzs/image/upload/v1709124043/slhykugugutkoiciqp0s.svg);
   }
 
   .authentication-wrapper:after {
@@ -176,7 +176,7 @@ export default {
     z-index: -1;
     bottom: -70px;
     right: 30px;
-    background-image: url(https://res-console.cloudinary.com/dszbsfjzs/media_explorer_thumbnails/6afeddee8c33d3e8b093b607996798df/detailed);
+    background-image: url(https://res.cloudinary.com/dszbsfjzs/image/upload/v1709124802/m9odiwlcu31voau8ijgg.svg);
   }
 
 </style>
