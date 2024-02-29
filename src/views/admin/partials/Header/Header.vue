@@ -1,7 +1,6 @@
 <template>
-  <div class="header-wrapper fluid-container d-flex">
-    <h4 class="py-sm-4 py-3 my-0">{{ }}</h4>
-    <div class="dropdown py-sm-4 py-3 mt-sm-auto ms-auto flex-shrink-1 me-2">
+  <div class="header-wrapper fluid-container">
+    <!-- <div class="dropdown py-sm-4 py-3 mt-sm-auto ms-auto flex-shrink-1 me-2">
       <a
         href="#"
         class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
@@ -30,6 +29,63 @@
         </li>
         <li><a class="dropdown-item" href="#">Sign out</a></li>
       </ul>
+    </div> -->
+    <div class="d-flex justify-content-end p-2">
+      <v-menu
+        min-width="200px"
+        rounded
+      >
+        <template v-slot:activator="{ props }">
+          <v-btn
+            icon="mdi-menu-down"
+            size="small"
+            variant="text"
+            v-bind="props"
+          ></v-btn>
+          <v-btn
+            icon
+            v-bind="props"
+            size="small"
+          >
+            <v-avatar>
+              <v-img
+                alt="John"
+                :src="account.avatar"
+              ></v-img>
+            </v-avatar>
+          </v-btn>
+        </template>
+        <v-card class="mt-1">
+          <v-card-text>
+            <div class="mx-auto text-center">
+              <v-avatar>
+                <v-img
+                  alt="John"
+                  :src="account.avatar"
+                ></v-img>
+              </v-avatar>
+              <h4 class="mt-1">{{ account.fullName }}</h4>
+              <p class="text-caption mt-1">
+                {{ account.email }}
+              </p>
+              <v-divider class="my-3"></v-divider>
+              <v-btn
+                variant="text"
+                rounded
+              >
+                Edit Account
+              </v-btn>
+              <v-divider class="my-3"></v-divider>
+              <v-btn
+                variant="text"
+                rounded
+              >
+                Log out
+              </v-btn>
+            </div>
+          </v-card-text>
+        </v-card>
+      </v-menu>
     </div>
   </div>
 </template>
