@@ -124,8 +124,8 @@ export default {
       this.loading = false
     },
     async login() {
+      const authStore = useAuthStore()
       try {
-        const authStore = useAuthStore()
         authStore.loginStart()
         return new Promise(async (resolve, reject) => {
           const result = await AuthService.login({
@@ -147,7 +147,7 @@ export default {
         })
       }
       catch (err) {
-        console.log(err)
+        authStore.loginFailed()
       }
     },
     ...mapActions(useAuthStore, ['loginStart', 'loginSuccess', 'loginFailed']),
