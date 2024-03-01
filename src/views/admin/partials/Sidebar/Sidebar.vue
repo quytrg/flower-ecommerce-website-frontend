@@ -13,7 +13,7 @@
 <script>
 import VueSidebarMenuAkahon from "vue-sidebar-menu-akahon";
 import { mapState } from 'pinia'
-import { useAuthStore } from '@/stores/auth.store'
+import { useAuthStore } from '@/stores/admin/auth.store'
 
 export default {
   name: "Sidebar",

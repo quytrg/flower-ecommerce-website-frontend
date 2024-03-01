@@ -85,7 +85,7 @@
 <script>
 import AuthService from "@/services/admin/auth.service";
 import { mapState, mapActions } from 'pinia'
-import { useAuthStore } from '@/stores/auth.store'
+import { useAuthStore } from '@/stores/admin/auth.store'
 
 export default {
   name: "AdminLogin",
