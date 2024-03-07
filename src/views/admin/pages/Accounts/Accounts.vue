@@ -193,23 +193,21 @@
     },
     methods: {
       async getAccounts() {
-        if (this.currentAccount.accessToken) {
-          try {
-            const filter = Object.fromEntries(
-              Object.entries(this.filter).filter(([key, value]) => value !== '')
-            );
-            const data = await AccountService.get(this.currentAccount.accessToken, {
-              params: {
-                ...filter,
-                page: this.page
-              }
-            })
-            this.accounts = data.accounts
-            this.totalPages = data.totalPages
-          }
-          catch (err) {
-            console.log(err)
-          }
+        try {
+          const filter = Object.fromEntries(
+            Object.entries(this.filter).filter(([key, value]) => value !== '')
+          );
+          const data = await AccountService.get(this.currentAccount.accessToken, {
+            params: {
+              ...filter,
+              page: this.page
+            }
+          })
+          this.accounts = data.accounts
+          this.totalPages = data.totalPages
+        }
+        catch (err) {
+          console.log(err)
         }
       },
       async getRoles() {
