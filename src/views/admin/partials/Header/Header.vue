@@ -50,7 +50,7 @@
             <v-avatar>
               <v-img
                 alt="John"
-                :src="account.avatar"
+                :src="currentAccount.avatar"
               ></v-img>
             </v-avatar>
           </v-btn>
@@ -61,12 +61,12 @@
               <v-avatar>
                 <v-img
                   alt="John"
-                  :src="account.avatar"
+                  :src="currentAccount.avatar"
                 ></v-img>
               </v-avatar>
-              <h4 class="mt-1">{{ account.fullName }}</h4>
+              <h4 class="mt-1">{{ currentAccount.fullName }}</h4>
               <p class="text-caption mt-1">
-                {{ account.email }}
+                {{ currentAccount.email }}
               </p>
               <v-divider class="my-3"></v-divider>
               <v-btn
@@ -103,9 +103,7 @@ export default {
     },
   },
   data() {
-    const authStore = useAuthStore()
     return {
-      account: authStore.currentAccount
     }
   },
   computed: {

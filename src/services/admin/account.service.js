@@ -6,8 +6,13 @@ class AccountService {
     this.api = createApiClient(baseUrl);
   }
   
-  async get(options={}) {
-    return (await this.api.get('/', options)).data;
+  async get(accessToken, options={}) {
+    return (await this.api.get('/', {
+      headers: {
+        "authorization": `Bearer ${accessToken}`,
+      },
+      ...options
+    })).data;
   }
 
   async create(formData) {

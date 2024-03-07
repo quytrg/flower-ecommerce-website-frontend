@@ -84,8 +84,10 @@
 
 <script>
 import AuthService from "@/services/admin/auth.service";
-import { mapState, mapActions } from 'pinia'
+import RoleService from '@/services/admin/role.service'
+import { mapActions } from 'pinia'
 import { useAuthStore } from '@/stores/admin/auth.store'
+import { useRoleStore } from '@/stores/admin/role.store'
 
 export default {
   name: "AdminLogin",
@@ -120,25 +122,25 @@ export default {
   methods: {
     async handleSubmit(event) {
       this.loading = true
-      const response = await event
+      await event
       this.loading = false
     },
     async login() {
-      const authStore = useAuthStore()
       try {
-        authStore.loginStart()
+        this.loginStart()
         return new Promise(async (resolve, reject) => {
-          const result = await AuthService.login({
+          await AuthService.login({
             email: this.email,
             password: this.password
           })
-          .then(res => {
-            authStore.loginSuccess(res)
+          .then(async (res) => {
+            this.loginSuccess(res)
+            await this.getRole(res)
             this.$router.push({ name: 'Dashboard'})
             return resolve(true)
           })
           .catch(err => {
-            authStore.loginFailed()
+            this.loginFailed()
             if (err.response.status === 403) {
               return resolve("Account is locked")
             }
@@ -147,10 +149,28 @@ export default {
         })
       }
       catch (err) {
-        authStore.loginFailed()
+        this.loginFailed()
+        return "Something went wrong"
+      }
+    },
+    async getRole(account) {
+      try {
+        this.getRoleStart()
+        await RoleService.getById(account?.roleId)
+          .then(res => {
+            this.getRoleSuccess(res)
+          })
+          .catch(err => {
+            this.getRoleFailed()
+          })
+      }
+      catch (err) {
+        this.getRoleFailed()
+        console.log(err)
       }
     },
     ...mapActions(useAuthStore, ['loginStart', 'loginSuccess', 'loginFailed']),
+    ...mapActions(useRoleStore, ['getRoleStart', 'getRoleSuccess', 'getRoleFailed'])
   },
   computed: {
   }
