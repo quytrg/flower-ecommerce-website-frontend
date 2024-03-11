@@ -86,7 +86,7 @@
 import AuthService from "@/services/admin/auth.service";
 import RoleService from '@/services/admin/role.service'
 import { mapActions } from 'pinia'
-import { useAuthStore } from '@/stores/admin/auth.store'
+import { useAccountStore } from '@/stores/admin/account.store'
 import { useRoleStore } from '@/stores/admin/role.store'
 
 export default {
@@ -169,7 +169,7 @@ export default {
         console.log(err)
       }
     },
-    ...mapActions(useAuthStore, ['loginStart', 'loginSuccess', 'loginFailed']),
+    ...mapActions(useAccountStore, ['loginStart', 'loginSuccess', 'loginFailed']),
     ...mapActions(useRoleStore, ['getRoleStart', 'getRoleSuccess', 'getRoleFailed'])
   },
   computed: {

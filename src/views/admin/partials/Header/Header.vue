@@ -92,7 +92,7 @@
 
 <script>
 import { mapState } from 'pinia'
-import { useAuthStore } from '@/stores/admin/auth.store'
+import { useAccountStore } from '@/stores/admin/account.store'
 
 export default {
   name: "Header",
@@ -107,7 +107,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(useAuthStore, ['currentAccount'])
+    ...mapState(useAccountStore, ['currentAccount'])
   }
 };
 </script>
