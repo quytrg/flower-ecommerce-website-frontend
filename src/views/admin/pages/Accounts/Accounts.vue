@@ -164,7 +164,6 @@
   import RoleService from '@/services/admin/role.service'
   import confirmDialogHelper from '@/helpers/admin/dialogs/confirm.helper.js'
   import successDialogHelper from '@/helpers/admin/dialogs/success.helper.js'
-  import { useAuthStore } from "@/stores/admin/auth.store"
   import { mapState } from 'pinia'
   import { useRoleStore } from '@/stores/admin/role.store'
 
@@ -197,7 +196,7 @@
           const filter = Object.fromEntries(
             Object.entries(this.filter).filter(([key, value]) => value !== '')
           );
-          const data = await AccountService.get(this.currentAccount.accessToken, {
+          const data = await AccountService.get({
             params: {
               ...filter,
               page: this.page
@@ -270,7 +269,6 @@
       }
     },
     computed: {
-      ...mapState(useAuthStore, ['currentAccount']),
       ...mapState(useRoleStore, ['role'])
     }
   }
