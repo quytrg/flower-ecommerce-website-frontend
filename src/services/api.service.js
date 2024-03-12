@@ -23,7 +23,7 @@ const createApiClient = (baseURL) => {
 
     const { code, message } = response.data
     if (code && code === 401) {
-      if (message && message === 'jwt expired') {
+      if (message && (message === 'jwt expired' || message === 'jwt required')) {
         try {
           await refreshToken()
           return instance(config)
