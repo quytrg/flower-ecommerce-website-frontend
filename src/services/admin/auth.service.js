@@ -10,6 +10,10 @@ class AuthService {
     return (await this.api.post("/login", account)).data;
   }
 
+  async getInfo() {
+    return (await this.api.get('/me')).data
+  }
+
 }
 
 export default new AuthService();

@@ -4,9 +4,9 @@
     menuTitle="KyivAdmin"
     menuIcon="bxs-florist"
     :menuItems="menuItems"
-    :profileName="currentAccount.fullName"
+    :profileName="currentAccount?.fullName"
     profileRole="administrator"
-    :profileImg="currentAccount.avatar"
+    :profileImg="currentAccount?.avatar"
   />
 </template>
 

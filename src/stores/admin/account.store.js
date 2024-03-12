@@ -8,7 +8,6 @@ export const useAccountStore = defineStore('account', {
       error: false
     }
   },
-  
   actions: {
     loginStart() {
       this.isFetching = true
@@ -22,6 +21,9 @@ export const useAccountStore = defineStore('account', {
     loginFailed() {
       this.isFetching = false
       this.error = true
+    },
+    updateAccountInfo(payload) {
+      this.currentAccount = payload
     }
   },
 })

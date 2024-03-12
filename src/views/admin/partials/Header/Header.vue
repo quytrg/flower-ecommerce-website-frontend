@@ -50,7 +50,7 @@
             <v-avatar>
               <v-img
                 alt="John"
-                :src="currentAccount.avatar"
+                :src="currentAccount?.avatar"
               ></v-img>
             </v-avatar>
           </v-btn>
@@ -61,12 +61,12 @@
               <v-avatar>
                 <v-img
                   alt="John"
-                  :src="currentAccount.avatar"
+                  :src="currentAccount?.avatar"
                 ></v-img>
               </v-avatar>
-              <h4 class="mt-1">{{ currentAccount.fullName }}</h4>
+              <h4 class="mt-1">{{ currentAccount?.fullName }}</h4>
               <p class="text-caption mt-1">
-                {{ currentAccount.email }}
+                {{ currentAccount?.email }}
               </p>
               <v-divider class="my-3"></v-divider>
               <v-btn
@@ -91,8 +91,9 @@
 </template>
 
 <script>
-import { mapState } from 'pinia'
+import { mapState, mapActions } from 'pinia'
 import { useAccountStore } from '@/stores/admin/account.store'
+import authService from '@/services/admin/auth.service';
 
 export default {
   name: "Header",
@@ -108,6 +109,20 @@ export default {
   },
   computed: {
     ...mapState(useAccountStore, ['currentAccount'])
+  },
+  methods: {
+    ...mapActions(useAccountStore, ['updateAccountInfo'])
+  },
+  async created() {
+    if (this.currentAccount === null) {
+      try {
+        const result = await authService.getInfo()
+        this.updateAccountInfo(result)
+      }
+      catch (err) {
+        console.log(err)
+      }
+    }
   }
 };
 </script>

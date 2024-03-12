@@ -1,5 +1,5 @@
 <template>
-  <div class="accounts fluid-container mx-5" v-if="role.permissions.includes('read_accounts')">
+  <div class="accounts fluid-container mx-5" v-if="role?.permissions.includes('read_accounts')">
     <div class="accounts-title my-4 d-flex align-items-center">
       <h4 class="gray-text">Account Settings</h4>
       <h5 class="mx-1">/</h5> 
