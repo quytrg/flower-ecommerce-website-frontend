@@ -13,7 +13,6 @@ const createApiClient = (baseURL) => {
   const instance = axios.create({
     baseURL,
     withCredentials: true,
-    timeout: 3 * 1000
   });
 
   instance.interceptors.response.use(async (response) => {

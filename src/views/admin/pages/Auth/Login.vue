@@ -84,10 +84,8 @@
 
 <script>
 import AuthService from "@/services/admin/auth.service";
-import RoleService from '@/services/admin/role.service'
 import { mapActions } from 'pinia'
 import { useAccountStore } from '@/stores/admin/account.store'
-import { useRoleStore } from '@/stores/admin/role.store'
 
 export default {
   name: "AdminLogin",
@@ -135,7 +133,6 @@ export default {
           })
           .then(async (res) => {
             this.loginSuccess(res)
-            await this.getRole(res)
             this.$router.push({ name: 'Dashboard'})
             return resolve(true)
           })
@@ -153,24 +150,7 @@ export default {
         return "Something went wrong"
       }
     },
-    async getRole(account) {
-      try {
-        this.getRoleStart()
-        await RoleService.getById(account?.roleId)
-          .then(res => {
-            this.getRoleSuccess(res)
-          })
-          .catch(err => {
-            this.getRoleFailed()
-          })
-      }
-      catch (err) {
-        this.getRoleFailed()
-        console.log(err)
-      }
-    },
     ...mapActions(useAccountStore, ['loginStart', 'loginSuccess', 'loginFailed']),
-    ...mapActions(useRoleStore, ['getRoleStart', 'getRoleSuccess', 'getRoleFailed'])
   },
   computed: {
   }

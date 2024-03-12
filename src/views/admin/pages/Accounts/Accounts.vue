@@ -1,5 +1,5 @@
 <template>
-  <div class="accounts fluid-container mx-5" v-if="role?.permissions.includes('read_accounts')">
+  <div class="accounts fluid-container mx-5" v-if="permissions.includes('read_accounts')">
     <div class="accounts-title my-4 d-flex align-items-center">
       <h4 class="gray-text">Account Settings</h4>
       <h5 class="mx-1">/</h5> 
@@ -164,8 +164,6 @@
   import RoleService from '@/services/admin/role.service'
   import confirmDialogHelper from '@/helpers/admin/dialogs/confirm.helper.js'
   import successDialogHelper from '@/helpers/admin/dialogs/success.helper.js'
-  import { mapState } from 'pinia'
-  import { useRoleStore } from '@/stores/admin/role.store'
 
   export default {
     name: "Accounts",
@@ -188,6 +186,7 @@
         checkedItems: [],
         page: 1,
         totalPages: 0,
+        permissions: []
       }
     },
     methods: {
@@ -196,14 +195,15 @@
           const filter = Object.fromEntries(
             Object.entries(this.filter).filter(([key, value]) => value !== '')
           );
-          const data = await AccountService.get({
+          const { info, permissions } = await AccountService.get({
             params: {
               ...filter,
               page: this.page
             }
           })
-          this.accounts = data.accounts
-          this.totalPages = data.totalPages
+          this.accounts = info.accounts
+          this.totalPages = info.totalPages
+          this.permissions = permissions
         }
         catch (err) {
           console.log(err)
@@ -253,7 +253,7 @@
       }
     },
     created() {
-      this.getAccounts()
+      this.getAccounts(),
       this.getRoles()
     },
     watch: {
@@ -268,9 +268,6 @@
         this.getAccounts()
       }
     },
-    computed: {
-      ...mapState(useRoleStore, ['role'])
-    }
   }
 </script>
 
