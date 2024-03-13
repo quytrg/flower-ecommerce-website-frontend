@@ -10,7 +10,7 @@ class AuthService {
     return (await this.api.post("/login", account)).data;
   }
 
-  async getInfo() {
+  async getAuth() {
     return (await this.api.get('/me')).data
   }
 

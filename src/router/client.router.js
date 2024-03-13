@@ -14,21 +14,25 @@ const clientRouter = [
         path: "",
         name: "Home",
         component: Home,
+        meta: { requireAuth: false }
       },
       {
         path: "categories",
         name: "Shop",
         component: Shop,
+        meta: { requireAuth: false }
       },
       {
         path: "categories/:categoryname",
         name: "Products",
         component: Products,
+        meta: { requireAuth: false }
       },
       {
         path:"products/:slug",
         name: "ProductDetails",
         component: ProductDetails,
+        meta: { requireAuth: false }
       }
     ]
   },

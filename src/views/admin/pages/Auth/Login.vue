@@ -13,7 +13,7 @@
               >
                 <div class="d-flex justify-content-center align-items-center mb-7 mx-3">
                   <img 
-                    src="https://res-console.cloudinary.com/dszbsfjzs/media_explorer_thumbnails/3abe8fe14126b2d0d791598a66213c4c/detailed" 
+                    src="https://res.cloudinary.com/dszbsfjzs/image/upload/v1708946716/iv6kxgi9zufbmogqp6lr.png" 
                     alt="logo"
                     style="
                       width: 48px;

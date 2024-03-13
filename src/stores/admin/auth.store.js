@@ -8,6 +8,9 @@ export const useAuthStore = defineStore('auth', {
       error: false
     }
   },
+  getters: {
+    isAuth: (state) => state.currentAccount !== null
+  },
   actions: {
     loginStart() {
       this.isFetching = true
@@ -22,7 +25,7 @@ export const useAuthStore = defineStore('auth', {
       this.isFetching = false
       this.error = true
     },
-    updateAccountInfo(payload) {
+    update(payload) {
       this.currentAccount = payload
     }
   },

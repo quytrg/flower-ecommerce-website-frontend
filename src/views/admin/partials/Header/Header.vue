@@ -91,9 +91,8 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'pinia'
+import { mapState } from 'pinia'
 import { useAuthStore } from '@/stores/admin/auth.store'
-import authService from '@/services/admin/auth.service';
 
 export default {
   name: "Header",
@@ -110,20 +109,6 @@ export default {
   computed: {
     ...mapState(useAuthStore, ['currentAccount'])
   },
-  methods: {
-    ...mapActions(useAuthStore, ['updateAccountInfo'])
-  },
-  async created() {
-    if (this.currentAccount === null) {
-      try {
-        const result = await authService.getInfo()
-        this.updateAccountInfo(result)
-      }
-      catch (err) {
-        console.log(err)
-      }
-    }
-  }
 };
 </script>
 

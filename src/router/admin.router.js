@@ -20,36 +20,43 @@ const adminRouter = [
         path: "",
         name: "Dashboard",
         component: Dashboard,
+        meta: { requireAuth: true }
       },
       {
         path: "products",
         name: "ProductsAdmin",
         component: ProductsAdmin,
+        meta: { requireAuth: true }
       },
       {
         path: "products/create",
         name: "CreateProduct",
         component: CreateProduct,
+        meta: { requireAuth: true }
       },
       {
         path: "products/modify/:slug",
         name: "ModifyProduct",
-        component: ModifyProduct
+        component: ModifyProduct,
+        meta: { requireAuth: true }
       },
       {
         path: "accounts",
         name: "Accounts",
-        component: Accounts
+        component: Accounts,
+        meta: { requireAuth: true }
       },
       {
         path: "accounts/create",
         name: "CreateAccount",
-        component: CreateAccount
+        component: CreateAccount,
+        meta: { requireAuth: true }
       },
       {
         path: "accounts/modify/:id",
         name: "ModifyAccount",
-        component: ModifyAccount
+        component: ModifyAccount,
+        meta: { requireAuth: true }
       },
     ]
   },
@@ -62,6 +69,7 @@ const adminRouter = [
         path: "login",
         name: "AdminLogin",
         component: AdminLogin,
+        meta: { requireAuth: false }
       },
     ]
   }

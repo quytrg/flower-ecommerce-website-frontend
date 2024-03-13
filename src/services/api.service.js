@@ -29,8 +29,7 @@ const createApiClient = (baseURL) => {
           return instance(config)
         }
         catch (err) {
-          console.log("An error occured while refreshing token")
-          console.log(err)
+          return Promise.reject(err)
         }
       }
     }
