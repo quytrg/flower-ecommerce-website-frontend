@@ -92,7 +92,7 @@
 
 <script>
 import { mapState, mapActions } from 'pinia'
-import { useAccountStore } from '@/stores/admin/account.store'
+import { useAuthStore } from '@/stores/admin/auth.store'
 import authService from '@/services/admin/auth.service';
 
 export default {
@@ -108,10 +108,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(useAccountStore, ['currentAccount'])
+    ...mapState(useAuthStore, ['currentAccount'])
   },
   methods: {
-    ...mapActions(useAccountStore, ['updateAccountInfo'])
+    ...mapActions(useAuthStore, ['updateAccountInfo'])
   },
   async created() {
     if (this.currentAccount === null) {

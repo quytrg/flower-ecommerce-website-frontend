@@ -85,7 +85,7 @@
 <script>
 import AuthService from "@/services/admin/auth.service";
 import { mapActions } from 'pinia'
-import { useAccountStore } from '@/stores/admin/account.store'
+import { useAuthStore } from '@/stores/admin/auth.store'
 
 export default {
   name: "AdminLogin",
@@ -150,7 +150,7 @@ export default {
         return "Something went wrong"
       }
     },
-    ...mapActions(useAccountStore, ['loginStart', 'loginSuccess', 'loginFailed']),
+    ...mapActions(useAuthStore, ['loginStart', 'loginSuccess', 'loginFailed']),
   },
   computed: {
   }
