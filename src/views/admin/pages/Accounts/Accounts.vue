@@ -1,5 +1,5 @@
 <template>
-  <div class="accounts fluid-container mx-5" v-if="permissions.includes('read_accounts')">
+  <div class="accounts fluid-container mx-5" v-if="permissions?.includes('read_accounts')">
     <div class="accounts-title my-4 d-flex align-items-center">
       <h4 class="gray-text">Account Settings</h4>
       <h5 class="mx-1">/</h5> 
@@ -150,6 +150,135 @@
       </div>
     </div>
   </div>
+
+  <div class="accounts fluid-container mx-5" v-else-if="permissions === null">
+    <v-row>
+      <v-col cols="6">
+        <v-skeleton-loader
+          color="grey-lighten-5"
+          class="my-2"
+          max-width="400"
+          type="heading"
+        ></v-skeleton-loader>
+      </v-col>
+    </v-row>
+
+    <div class="card mb-3">
+      <div class="card-header d-flex justify-content-between">
+        <v-row>
+          <v-col cols="6" class="py-1">
+            <v-skeleton-loader
+              class="my-0"
+              max-width="120"
+              type="subtitle"
+            ></v-skeleton-loader>
+          </v-col>
+          <v-col cols="6" class="py-1">
+            <v-skeleton-loader
+              class="ms-auto my-0"
+              max-width="120"
+              type="subtitle"
+            ></v-skeleton-loader>
+          </v-col>
+        </v-row>
+      </div>
+      <div class="card-body">
+        <v-row>
+          <v-col cols="6" class="py-1">
+            <v-skeleton-loader
+              class="my-0"
+              max-width="300"
+              type="heading"
+            ></v-skeleton-loader>
+          </v-col>
+          <v-col cols="6" class="py-1">
+            <v-skeleton-loader
+              class="ms-auto my-0"
+              max-width="400"
+              type="heading"
+            ></v-skeleton-loader>
+          </v-col>
+        </v-row>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header d-flex justify-content-between">
+        <v-row>
+          <v-col cols="6" class="py-1">
+            <v-skeleton-loader
+              class="my-0"
+              max-width="120"
+              type="subtitle"
+            ></v-skeleton-loader>
+          </v-col>
+          <v-col cols="6" class="py-1">
+            <v-skeleton-loader
+              class="ms-auto my-0"
+              max-width="120"
+              type="subtitle"
+            ></v-skeleton-loader>
+          </v-col>
+        </v-row>
+      </div>
+      <div class="card-body">
+        <v-row>
+          <v-col cols="6" class="py-1">
+            <v-skeleton-loader
+              class="my-0"
+              max-width="300"
+              type="heading"
+            ></v-skeleton-loader>
+          </v-col>
+          <v-col cols="6" class="py-1">
+            <v-skeleton-loader
+              class="ms-auto my-0"
+              max-width="400"
+              type="heading"
+            ></v-skeleton-loader>
+          </v-col>
+        </v-row>
+        <table class="table table-sm mt-3">
+          <thead>
+            <tr>
+              <th colspan="12">
+                <v-skeleton-loader
+                  class="my-0"
+                  type="table-row"
+                ></v-skeleton-loader>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="12">
+                <v-skeleton-loader
+                  class="my-0"
+                  type="table-row-divider@6"
+                ></v-skeleton-loader>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="text-center">
+          <v-container>
+            <v-row justify="center">
+              <v-col cols="8" class="p-0">
+                <v-container class="max-width p-0">
+                  <v-skeleton-loader
+                    class="mx-auto"
+                    max-width="300"
+                    type="heading"
+                  ></v-skeleton-loader>
+                </v-container>
+              </v-col>
+            </v-row>
+          </v-container>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="accounts fluid-container mx-5" v-else>
     <h3 class="my-4">Account does not have permission to view this page</h3>
   </div>
@@ -186,7 +315,7 @@
         checkedItems: [],
         page: 1,
         totalPages: 0,
-        permissions: []
+        permissions: null
       }
     },
     methods: {
