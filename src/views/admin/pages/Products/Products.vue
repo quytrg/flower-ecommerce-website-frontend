@@ -33,11 +33,18 @@
       <div class="card mb-3">
         <div class="card-header d-flex justify-content-between">
           <h5 class="my-0 d-flex align-items-center">Products</h5>
-          <div class="d-flex">
+
+          <v-row justify="end" v-if="categories.length">
+            <v-col cols="3">
+              <Select v-model:selectedValue="filter.category" :items="categories"/>
+            </v-col>
+          </v-row>
+
+          <!-- <div class="d-flex">
             <SelectCategory
               v-model:selectedCategory="filter.category" 
             />
-          </div>
+          </div> -->
         </div>
         <div class="card-body">
           <div class="product-action d-flex justify-content-between">
@@ -307,6 +314,8 @@
   import { mapState } from 'pinia'
   import { useAuthStore } from '@/stores/admin/auth.store'
   import Unauthorized from '@/components/admin/Unauthorized/Unauthorized.vue'
+  import Select from '@/components/admin/Select/Select.vue'
+  import CategoryService from '@/services/admin/category.service'
 
   export default {
     name: "Product",
@@ -316,10 +325,12 @@
       SelectCategory,
       ChangeMulti,
       Unauthorized,
+      Select,
     },
     data() {
       return {
         products: [],
+        categories: [],
         filter: {
           status: '',
           keyword: '',
@@ -335,7 +346,7 @@
     methods: {
       async getProducts() {
         const filter = Object.fromEntries(
-          Object.entries(this.filter).filter(([key, value]) => value !== '')
+          Object.entries(this.filter).filter(([key, value]) => (value !== '' || value !== null))
         );
         const data = await ProductService.get({
           params: {
@@ -418,10 +429,24 @@
         catch (err) {
           console.log(err)
         }
-      }
+      },
+      async getAllCategories() {
+        try {
+          const filter = {
+            params: {
+              status: 'active'
+            }
+          }
+          this.categories = await CategoryService.getAll(filter)
+        }
+        catch(err) {
+          console.log(err)
+        }
+      },
     },
     created() {
-      this.getProducts()
+      this.getProducts(),
+      this.getAllCategories()
     },
     watch: {
       filter: {
