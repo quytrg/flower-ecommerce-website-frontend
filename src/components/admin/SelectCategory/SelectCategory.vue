@@ -8,7 +8,7 @@
         @change="handleSelect($event)"
         class="form-select"
       >
-        <option value="">Category</option>
+        <option value="" selected>Category</option>
         <option v-for="category in categories" :key="category._id" :value="category._id">
           {{ category.title }}
         </option>
