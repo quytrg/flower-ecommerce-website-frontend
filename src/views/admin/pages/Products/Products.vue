@@ -1,5 +1,5 @@
 <template>
-  <div class="product fluid-container mx-5">
+  <div class="product fluid-container mx-5" v-if="currentAccount?.permissions.includes('read_products')">
     <div class="product-title my-4 d-flex align-items-center">
       <h4 class="gray-text">eCommerce</h4>
       <h5 class="mx-1">/</h5> 
@@ -172,6 +172,8 @@
   import ChangeMulti from '@/components/admin/ChangeMulti/ChangeMulti.vue'
   import confirmDialogHelper from '@/helpers/admin/dialogs/confirm.helper.js'
   import successDialogHelper from '@/helpers/admin/dialogs/success.helper.js'
+  import { mapState } from 'pinia'
+  import { useAuthStore } from '@/stores/admin/auth.store'
 
   export default {
     name: "Product",
@@ -296,6 +298,9 @@
       page() {
         this.getProducts()
       }
+    },
+    computed: {
+      ...mapState(useAuthStore, ['currentAccount'])
     }
   }
 </script>

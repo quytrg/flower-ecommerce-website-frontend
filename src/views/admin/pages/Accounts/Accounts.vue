@@ -43,7 +43,7 @@
           <div class="account-action d-flex justify-content-between">
             <!-- <ChangeMulti @apply="handleChangeMulti"/> -->
             <router-link :to="{ name: 'CreateAccount' }">
-              <button class="btn btn-main btn-primary">+ New Product</button>
+              <button class="btn btn-main btn-primary">+ New Account</button>
             </router-link>
           </div>
           <table class="table table-sm mt-3">
@@ -282,7 +282,7 @@
   </div>
 
   <div class="accounts fluid-container mx-5" v-else>
-    <h3 class="my-4">Account does not have permission to view this page</h3>
+    <Unauthorized />
   </div>
 </template>
 
@@ -297,6 +297,7 @@
   import successDialogHelper from '@/helpers/admin/dialogs/success.helper.js'
   import { mapState } from 'pinia'
   import { useAuthStore } from '@/stores/admin/auth.store'
+  import Unauthorized from '@/components/admin/Unauthorized/Unauthorized.vue'
 
   export default {
     name: "Accounts",
@@ -305,6 +306,7 @@
       Search,
       SelectCategory,
       ChangeMulti,
+      Unauthorized
     },
     data() {
       return {
