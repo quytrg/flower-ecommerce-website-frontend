@@ -217,3 +217,10 @@
 }
 
 /* End thumbnail product, account,... */
+
+/* Hide v-input_details of select */
+.select .v-text-field .v-input__details {
+  padding-inline: 16px;
+  display: none; 
+} 
+/* End hide v-input_details of select */

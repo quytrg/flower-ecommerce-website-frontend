@@ -42,13 +42,10 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .select {
   min-width: 200px;
 }
 
-.v-text-field .v-input__details {
-  padding-inline: 16px;
-  display: none;
-}
+
 </style>
