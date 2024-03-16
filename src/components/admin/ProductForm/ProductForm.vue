@@ -48,7 +48,25 @@
           <div class="card mb-3 px-2">
             <div class="card-body">
               <h5 class="card-title">Media</h5>
-              
+              <div class="mb-3 col-6 imageuploadify-container">
+                <label for="thumbnail" class="form-label">Image</label>
+                <Field
+                  id="thumbnail"
+                  name="thumbnail"
+                  type="file"
+                  class="form-control"
+                  accept="image/*"
+                  v-model="localProduct.thumbnail"
+                  @change="handleChangeImage($event)"
+                />
+                <ErrorMessage name="thumbnail" class="error-feedback text-warning" />
+                <div class="imageuploadify" v-if="previewImgURL">
+                  <img :src="previewImgURL" :alt="localProduct.title">
+                </div>
+                <div class="imageuploadify" v-else-if="this.localProduct.thumbnail">
+                  <img :src="this.localProduct.thumbnail" :alt="localProduct.title">
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -151,28 +169,6 @@
                 <ErrorMessage name="stock" class="error-feedback text-warning" />
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="row mb-3">
-        <div class="mb-3 col-6 imageuploadify-container">
-          <label for="thumbnail" class="form-label">Image</label>
-          <Field
-            id="thumbnail"
-            name="thumbnail"
-            type="file"
-            class="form-control"
-            accept="image/*"
-            v-model="localProduct.thumbnail"
-            @change="handleChangeImage($event)"
-          />
-          <ErrorMessage name="thumbnail" class="error-feedback text-warning" />
-          <div class="imageuploadify" v-if="previewImgURL">
-            <img :src="previewImgURL" :alt="localProduct.title">
-          </div>
-          <div class="imageuploadify" v-else-if="this.localProduct.thumbnail">
-            <img :src="this.localProduct.thumbnail" :alt="localProduct.title">
           </div>
         </div>
       </div>

@@ -17,6 +17,7 @@
 /* Preview image when uploading */
 .imageuploadify-container {
   position: relative;
+  height: 170px;
 }
 
 .imageuploadify {
@@ -24,7 +25,7 @@
   height: 100px;
   position: absolute;
   border-bottom: 1rem;
-  left: 1rem;
+  left: 0;
   overflow: hidden;
   margin-bottom: 1em;
   margin-top: 0.375rem;
