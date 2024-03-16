@@ -1,5 +1,5 @@
 <template>
-  <div class="modify-account container mt-3">
+  <div class="modify-account">
     <AccountForm 
       v-if="account"
       :account="account"

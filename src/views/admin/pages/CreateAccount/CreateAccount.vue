@@ -1,5 +1,5 @@
 <template>
-  <div class="create-account container mt-3">
+  <div class="create-account">
     <AccountForm 
       :account="account"
       @submit:account="createAccount"
