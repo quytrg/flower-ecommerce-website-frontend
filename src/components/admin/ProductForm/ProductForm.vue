@@ -48,24 +48,8 @@
           <div class="card mb-3 px-2">
             <div class="card-body">
               <h5 class="card-title">Media</h5>
-              <div class="mb-3 col-6 imageuploadify-container">
-                <label for="thumbnail" class="form-label">Image</label>
-                <Field
-                  id="thumbnail"
-                  name="thumbnail"
-                  type="file"
-                  class="form-control"
-                  accept="image/*"
-                  v-model="localProduct.thumbnail"
-                  @change="handleChangeImage($event)"
-                />
-                <ErrorMessage name="thumbnail" class="error-feedback text-warning" />
-                <div class="imageuploadify" v-if="previewImgURL">
-                  <img :src="previewImgURL" :alt="localProduct.title">
-                </div>
-                <div class="imageuploadify" v-else-if="this.localProduct.thumbnail">
-                  <img :src="this.localProduct.thumbnail" :alt="localProduct.title">
-                </div>
+              <div class="mb-3 col-6">
+                <ImageUploadify v-model:cloudURL="localProduct.thumbnail" fname="thumbnail"/>
               </div>
             </div>
           </div>
@@ -181,13 +165,16 @@
   import { Form, Field, ErrorMessage } from "vee-validate";
   import MultiSelectCategory from '@/components/admin/MultiSelectCategory/MultiSelectCategory.vue'
   import objectToFormDataHelper from '@/helpers/admin/convert/objectToFormData.helper'
+  import ImageUploadify from '@/components/admin/ImageUploadify/ImageUploadify.vue'
+
   export default {
     name: "ProductForm",
     components: {
       Form,
       Field,
       ErrorMessage,
-      MultiSelectCategory
+      MultiSelectCategory,
+      ImageUploadify
     },
     emits: ["submit:product"],
     props: {
@@ -234,7 +221,6 @@
       return {
         localProduct: this.product,
         productSchema,
-        previewImgURL: null
       }
     },
     methods: {
@@ -246,28 +232,12 @@
         const formData = objectToFormDataHelper(this.localProduct)
         this.$emit("submit:product", formData)
       },
-      handleChangeImage(e) {
-        try {
-          if (this.previewImgURL) {
-            URL.revokeObjectURL(this.previewImgURL)
-          }
-          this.previewImgURL = URL.createObjectURL(e.target.files[0]);
-        }
-        catch(err) {
-          console.log(err)
-        }
-      }
     },
     mounted() {
       tinymce.init({
         selector: "textarea.tiny-editor",
       });
     },
-    unmounted() {
-      if (this.previewImgURL) {
-        URL.revokeObjectURL(this.previewImgURL)
-      }
-    }
   }
 </script>
 

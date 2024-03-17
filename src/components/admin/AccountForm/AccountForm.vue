@@ -126,17 +126,8 @@
           <div class="card mb-3 px-2">
             <div class="card-body">
               <h5 class="card-title">Media</h5>
-              <div class="mb-3">
-                <label for="avatar" class="form-label">Avatar</label>
-                <Field
-                  id="avatar"
-                  name="avatar"
-                  type="text"
-                  class="form-control"
-                  placeholder="url..."
-                  v-model="localAccount.avatar"
-                />
-                <ErrorMessage name="avatar" class="error-feedback text-warning" />
+              <div class="mb-3 col-6">
+                <ImageUploadify v-model:cloudURL="localAccount.avatar" fname="avatar"/>
               </div>
             </div>
           </div>
@@ -149,12 +140,15 @@
 <script>
   import * as yup from "yup";
   import { Form, Field, ErrorMessage } from "vee-validate";
+  import ImageUploadify from '@/components/admin/ImageUploadify/ImageUploadify.vue'
+
   export default {
     name: "AccountForm",
     components: {
       Form,
       Field,
       ErrorMessage,
+      ImageUploadify
     },
     emits: ["submit:account"],
     props: {
@@ -188,7 +182,6 @@
       return {
         localAccount: this.account,
         accountSchema,
-        tab: null
       }
     },
     methods: {
@@ -196,11 +189,6 @@
         this.$emit("submit:account", this.localAccount)
       }
     },
-    watch: {
-      account(newVal) {
-        this.localAccount = newVal
-      }
-    }
   }
 </script>
 

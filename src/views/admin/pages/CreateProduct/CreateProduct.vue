@@ -38,7 +38,8 @@
         product: {
           status: 'active',
           discountPercentage: 0,
-          categories: null
+          categories: null,
+          thumbnail: null,
         }
       }
     }
