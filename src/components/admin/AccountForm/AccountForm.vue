@@ -141,6 +141,7 @@
   import * as yup from "yup";
   import { Form, Field, ErrorMessage } from "vee-validate";
   import ImageUploadify from '@/components/admin/ImageUploadify/ImageUploadify.vue'
+  import objectToFormDataHelper from '@/helpers/admin/convert/objectToFormData.helper'
 
   export default {
     name: "AccountForm",
@@ -186,7 +187,9 @@
     },
     methods: {
       handleSubmit() {
-        this.$emit("submit:account", this.localAccount)
+        // convert data to formdata
+        const formData = objectToFormDataHelper(this.localAccount)
+        this.$emit("submit:account", formData)
       }
     },
   }

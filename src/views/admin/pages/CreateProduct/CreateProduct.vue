@@ -12,7 +12,7 @@
   import ProductForm from '@/components/admin/ProductForm/ProductForm.vue';
   import ProductService from '@/services/admin/product.service.js'
   import Swal from 'sweetalert2'
-  import loadingHelperDialog from '@/helpers/admin/dialogs/loading.helper'
+  import loadingDialogHelper from '@/helpers/admin/dialogs/loading.helper'
   export default {
     name: "CreateProduct",
     components: {
@@ -21,7 +21,7 @@
     methods: {
       async createProduct(data) {
         try {
-          loadingHelperDialog(
+          loadingDialogHelper(
             "Creating product"
           )
           await ProductService.create(data)

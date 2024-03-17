@@ -11,6 +11,9 @@
 <script>
   import AccountForm from '@/components/admin/AccountForm/AccountForm.vue';
   import AccountService from '@/services/admin/account.service.js'
+  import loadingDialogHelper from '@/helpers/admin/dialogs/loading.helper'
+  import Swal from 'sweetalert2'
+
   export default {
     name: "CreateAccount",
     components: {
@@ -19,8 +22,11 @@
     methods: {
       async createAccount(data) {
         try {
-          console.log(data);
+          loadingDialogHelper(
+            "Creating product"
+          )
           await AccountService.create(data)
+          Swal.close()
           this.$router.push({ name: "Accounts" })
         }
         catch(err) {
