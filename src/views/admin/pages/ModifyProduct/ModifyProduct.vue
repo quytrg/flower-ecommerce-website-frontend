@@ -13,7 +13,7 @@
   import ProductForm from '@/components/admin/ProductForm/ProductForm.vue';
   import ProductService from '@/services/admin/product.service.js'
   import Swal from 'sweetalert2'
-  import loadingHelperDialog from '@/helpers/admin/dialogs/loading.helper'
+  import loadingDialogHelper from '@/helpers/admin/dialogs/loading.helper'
   import CategoryService from '@/services/admin/category.service';
   export default {
     name: "ModifyProduct",
@@ -38,7 +38,7 @@
       },
       async updateProduct(data) {
         try {
-          loadingHelperDialog()
+          loadingDialogHelper()
           await ProductService.update(data.get('_id'), data)
           Swal.close()
           this.$router.push({ name: "ProductsAdmin" })

@@ -23,7 +23,7 @@
       async createAccount(data) {
         try {
           loadingDialogHelper(
-            "Creating product"
+            "Creating account"
           )
           await AccountService.create(data)
           Swal.close()
