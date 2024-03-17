@@ -1,6 +1,6 @@
 <template>
   <div class="change-multi d-flex">
-    <div class="group-form">
+    <!-- <div class="group-form">
       <select 
         name="change-multi"
         id="change-multi" 
@@ -13,7 +13,17 @@
         <option value="position">Position</option>
         <option value="delete">Delete</option>
       </select>
-    </div>
+    </div> -->
+    <v-select
+      :items="items"
+      label="Change multiple"
+      density="compact"
+      item-title="title"
+      item-value="value"
+      clearable
+      v-model="selectedType"
+    >
+    </v-select>
     <button 
       type="submit" 
       class="btn btn-primary btn-main ms-1" 
@@ -29,7 +39,13 @@
     name: "ChangeMulti",
     data() {
       return {
-        selectedType: '',
+        selectedType: null,
+        items: [
+          { title: 'Active', value: 'active' },
+          { title: 'Inactive', value: 'inactive' },
+          { title: 'Position', value: 'position' },
+          { title: 'Delete', value: 'delete' },
+        ]
       }
     },
     methods: {
@@ -40,6 +56,8 @@
   }
 </script>
 
-<style scoped lang="scss">
-
+<style lang="scss" scoped>
+.change-multi {
+  min-width: 280px;
+}
 </style>

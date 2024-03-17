@@ -216,7 +216,6 @@
     width: auto;
   }
 }
-
 /* End thumbnail product, account,... */
 
 /* Hide v-input_details of select */
@@ -225,3 +224,10 @@
   display: none; 
 } 
 /* End hide v-input_details of select */
+
+/* Hide v-input_details of change multi */
+.change-multi .v-text-field .v-input__details {
+  padding-inline: 16px;
+  display: none; 
+} 
+/* End hide v-input_details of change mult */
