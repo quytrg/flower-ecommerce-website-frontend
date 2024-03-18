@@ -9,6 +9,7 @@ import CreateAccount from '@/views/admin/pages/CreateAccount/CreateAccount.vue'
 import ModifyAccount from '@/views/admin/pages/ModifyAccount/ModifyAccount.vue'
 import AdminAuthLayout from '@/views/admin/layouts/auth.vue'
 import AdminLogin from '@/views/admin/pages/Auth/Login.vue'
+import Roles from '@/views/admin/pages/Roles/Roles.vue'
 
 const adminRouter = [
   {
@@ -56,6 +57,12 @@ const adminRouter = [
         path: "accounts/modify/:id",
         name: "ModifyAccount",
         component: ModifyAccount,
+        meta: { requireAuth: true }
+      },
+      {
+        path: "roles",
+        name: "Roles",
+        component: Roles,
         meta: { requireAuth: true }
       },
     ]
