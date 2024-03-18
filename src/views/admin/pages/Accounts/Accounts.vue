@@ -33,15 +33,16 @@
       <div class="card mb-3">
         <div class="card-header d-flex justify-content-between">
           <h5 class="my-0 d-flex align-items-center">Accounts</h5>
-          <div class="d-flex">
-            <!-- <SelectCategory
-              v-model:selectedCategory="filter.category" 
-            /> -->
-          </div>
+          <v-row justify="end" v-if="roles.length">
+            <v-col cols="3">
+              <Select v-model:selectedValue="filter.roleId" :items="roles" label="Roles"/>
+            </v-col>
+          </v-row>
         </div>
         <div class="card-body">
           <div class="account-action d-flex justify-content-between">
             <!-- <ChangeMulti @apply="handleChangeMulti"/> -->
+            <div></div>
             <router-link :to="{ name: 'CreateAccount' }">
               <button class="btn btn-main btn-primary">+ New Account</button>
             </router-link>
@@ -298,6 +299,7 @@
   import { mapState } from 'pinia'
   import { useAuthStore } from '@/stores/admin/auth.store'
   import Unauthorized from '@/components/admin/Unauthorized/Unauthorized.vue'
+  import Select from '@/components/admin/Select/Select.vue'
 
   export default {
     name: "Accounts",
@@ -306,7 +308,8 @@
       Search,
       SelectCategory,
       ChangeMulti,
-      Unauthorized
+      Unauthorized,
+      Select
     },
     data() {
       return {
@@ -315,7 +318,7 @@
         filter: {
           status: '',
           keyword: '',
-          category: '',
+          roleId: '',
         },
         checkall: false,
         checkedItems: [],
