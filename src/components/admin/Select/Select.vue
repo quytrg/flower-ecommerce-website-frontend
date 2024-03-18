@@ -2,7 +2,7 @@
   <div class="select">
     <v-select
       :items="items"
-      label="Category"
+      :label="label"
       density="compact"
       item-title="title"
       item-value="_id"
@@ -46,6 +46,4 @@ export default {
 .select {
   min-width: 200px;
 }
-
-
 </style>

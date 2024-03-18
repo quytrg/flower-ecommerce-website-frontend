@@ -49,19 +49,26 @@
                   </div>
                 </div>
               </div>
-
-              <div class="mb-3 col-8">
-                <label for="email" class="form-label">Email (*)</label>
-                <Field
-                  id="email"
-                  name="email"
-                  type="email"
-                  class="form-control"
-                  v-model="localAccount.email"
-                />
-                <ErrorMessage name="email" class="error-feedback text-warning" />
+              <div class="row">
+                <div class="col-6">
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email (*)</label>
+                    <Field
+                      id="email"
+                      name="email"
+                      type="email"
+                      class="form-control"
+                      v-model="localAccount.email"
+                    />
+                    <ErrorMessage name="email" class="error-feedback text-warning" />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label class="form-label">Role (*)</label>
+                  <Select v-model:selectedValue="localAccount.roleId" :items="roles" label="Roles"/>
+                </div>
               </div>
-
+              
               <div class="row">
                 <div class="col-6">
                   <div class="mb-3">
@@ -142,6 +149,7 @@
   import { Form, Field, ErrorMessage } from "vee-validate";
   import ImageUploadify from '@/components/admin/ImageUploadify/ImageUploadify.vue'
   import objectToFormDataHelper from '@/helpers/admin/convert/objectToFormData.helper'
+  import Select from '@/components/admin/Select/Select.vue'
 
   export default {
     name: "AccountForm",
@@ -149,13 +157,18 @@
       Form,
       Field,
       ErrorMessage,
-      ImageUploadify
+      ImageUploadify,
+      Select
     },
     emits: ["submit:account"],
     props: {
       account: {
         type: Object,
         default: {}
+      },
+      roles: {
+        type: Array, 
+        default: []
       }
     },
     data() {

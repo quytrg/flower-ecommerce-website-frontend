@@ -36,7 +36,7 @@
 
           <v-row justify="end" v-if="categories.length">
             <v-col cols="3">
-              <Select v-model:selectedValue="filter.category" :items="categories"/>
+              <Select v-model:selectedValue="filter.category" :items="categories" label="Category"/>
             </v-col>
           </v-row>
 

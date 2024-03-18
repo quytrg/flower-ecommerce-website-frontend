@@ -1,7 +1,9 @@
 <template>
   <div class="create-account">
     <AccountForm 
+      v-if="roles"
       :account="account"
+      :roles="roles"
       @submit:account="createAccount"
       pageTitle="Add a new product"
     />
@@ -13,6 +15,7 @@
   import AccountService from '@/services/admin/account.service.js'
   import loadingDialogHelper from '@/helpers/admin/dialogs/loading.helper'
   import Swal from 'sweetalert2'
+  import roleService from '@/services/admin/role.service.js'
 
   export default {
     name: "CreateAccount",
@@ -32,14 +35,22 @@
         catch(err) {
           console.log(err)
         }
-      }
+      },
+      async getRoles() {
+        const result = await roleService.getAll()
+        this.roles = result.roles
+      },
     },
     data() {
       return {
         account: {
           status: 'active',
-        }
+        },
+        roles: null
       }
+    },
+    created() {
+      this.getRoles()
     }
   }
 </script>
