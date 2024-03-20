@@ -38,9 +38,9 @@
           <div class="roles-action d-flex justify-content-between">
             <!-- <ChangeMulti @apply="handleChangeMulti"/> -->
             <div></div>
-            <!-- <router-link :to="{ name: 'CreateProduct' }">
-              <button class="btn btn-main btn-primary">+ New Product</button>
-            </router-link> -->
+            <router-link :to="{ name: 'CreateRole' }">
+              <button class="btn btn-main btn-primary">+ New Role</button>
+            </router-link>
           </div>
           <table class="table table-sm mt-3">
             <thead>

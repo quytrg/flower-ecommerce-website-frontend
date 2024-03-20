@@ -13,6 +13,10 @@ class RoleService {
   async getById(id) {
     return (await this.api.get(`/${id}`)).data;
   }
+
+  async create(data) {
+    return (await this.api.post(`/`, data)).data;
+  }
 }
 
 export default new RoleService();
