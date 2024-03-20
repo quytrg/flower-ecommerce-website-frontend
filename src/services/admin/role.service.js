@@ -17,6 +17,10 @@ class RoleService {
   async create(data) {
     return (await this.api.post(`/`, data)).data;
   }
+
+  async update(id, data) {
+    return (await this.api.patch(`/${id}`, data)).data;
+  }
 }
 
 export default new RoleService();

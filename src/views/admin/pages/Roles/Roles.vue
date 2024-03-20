@@ -326,17 +326,18 @@
           roleId: '',
         }
       },
-      // async handleChangeStatus(product) {
-      //   const changeStatusTo = product.status === 'active' ? 'inactive' : 'active'
-      //   const formData = new FormData()
-      //   formData.append('status', changeStatusTo)
-      //   await ProductService.update(product._id, formData)
-      //   product.status = changeStatusTo
-      // },
+      async handleChangeStatus(role) {
+        const changeStatusTo = role.status === 'active' ? 'inactive' : 'active'
+        const data = {
+          status: changeStatusTo
+        }
+        await roleService.update(role._id, data)
+        role.status = changeStatusTo
+      },
 
-      // handleCheckAll() {  
-      //   this.checkedItems = this.products.map(() => this.checkall)
-      // },
+      handleCheckAll() {  
+        this.checkedItems = this.roles.map(() => this.checkall)
+      },
       // async handleChangeMulti(type) {
       //   const data = {
       //     ids: [],
