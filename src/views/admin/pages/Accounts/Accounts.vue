@@ -365,7 +365,7 @@
         this.filter = {
           status: '',
           keyword: '',
-          category: '',
+          roleId: '',
         }
       },
       async handleChangeStatus(account) {
