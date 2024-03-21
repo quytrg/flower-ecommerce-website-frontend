@@ -13,6 +13,7 @@ import Roles from '@/views/admin/pages/Roles/Roles.vue'
 import CreateRole from '@/views/admin/pages/CreateRole/CreateRole.vue'
 import ModifyRole from '@/views/admin/pages/ModifyRole/ModifyRole.vue'
 import Permissions from '@/views/admin/pages/Permissions/Permissions.vue'
+import Categories from '@/views/admin/pages/Categories/Categories.vue'
 
 const adminRouter = [
   {
@@ -84,6 +85,12 @@ const adminRouter = [
         path: "permissions",
         name: "Permissions",
         component: Permissions,
+        meta: { requireAuth: true }
+      },
+      {
+        path: "categories",
+        name: "Categories",
+        component: Categories,
         meta: { requireAuth: true }
       },
     ]
