@@ -25,6 +25,10 @@ class RoleService {
   async deleteOne(id) {
     return (await this.api.delete(`/${id}`)).data;
   }
+
+  async updatePermission(data) {
+    return (await this.api.patch(`/updatePermission`, data)).data;
+  }
 }
 
 export default new RoleService();
