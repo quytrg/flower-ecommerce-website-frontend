@@ -265,7 +265,7 @@
       </div>
     </div>
   </div>
-  <div class="product fluid-container mx-5" v-else>
+  <div class="role fluid-container mx-5" v-else>
     <Unauthorized />
   </div>
 </template>
@@ -379,20 +379,20 @@
       //   this.checkedItems = this.products.map(() => false)
       // },
 
-      // async handleDelete(id) {
-      //   try {
-      //     confirmDialogHelper().then(async (result) => {
-      //       if (result.isConfirmed) {
-      //         await ProductService.deleteOne(id)
-      //         this.getProducts()
-      //         successDialogHelper()
-      //       }
-      //     });
-      //   }
-      //   catch (err) {
-      //     console.log(err)
-      //   }
-      // },
+      async handleDelete(id) {
+        try {
+          confirmDialogHelper().then(async (result) => {
+            if (result.isConfirmed) {
+              await roleService.deleteOne(id)
+              this.getRoles()
+              successDialogHelper()
+            }
+          });
+        }
+        catch (err) {
+          console.log(err)
+        }
+      },
     },
     created() {
       this.getRoles()
