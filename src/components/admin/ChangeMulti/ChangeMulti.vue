@@ -21,6 +21,7 @@
       item-title="title"
       item-value="value"
       clearable
+      hide-details
       v-model="selectedType"
     >
     </v-select>

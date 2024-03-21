@@ -7,6 +7,7 @@
       item-title="title"
       item-value="_id"
       clearable
+      hide-details
       @update:modelValue="handleSelect($event)"
     >
     </v-select>
