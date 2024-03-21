@@ -393,8 +393,12 @@
   import { useAuthStore } from '@/stores/admin/auth.store'
   import roleService from '@/services/admin/role.service'
   import successDialogHelper from '@/helpers/admin/dialogs/success.helper'
+  import Unauthorized from '@/components/admin/Unauthorized/Unauthorized.vue'
 
   export default {
+    components: {
+      Unauthorized
+    },
     data() {
       return {
         isFetching: false,
