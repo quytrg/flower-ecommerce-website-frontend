@@ -25,10 +25,10 @@ export default {
         { link: { name: 'ProductsAdmin' }, name: 'Products', tooltip: 'Products', icon: 'bxl-dropbox' },
         { link: { name: 'Accounts' }, name: 'Accounts', tooltip: 'Accounts', icon: 'bx-user' },
         { link: { name: 'Roles' }, name: 'Roles', tooltip: 'Roles', icon: 'bx bxs-user-account' },
+        { link: { name: 'Permissions' }, name: 'Permissions', tooltip: 'Permissions', icon: 'bx bx-lock' },
         { link: { name: 'Dashboard' }, name: 'Orders', tooltip: 'Orders', icon: 'bx-cart-alt' },
         { link: { name: 'Dashboard' }, name: 'File Manager', tooltip: 'File Manager', icon: 'bx-folder' },
         { link: { name: 'Dashboard' }, name: 'Setting', tooltip: 'Setting', icon: 'bx-cog' },
-
       ],
     }
   },

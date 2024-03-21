@@ -12,6 +12,7 @@ import AdminLogin from '@/views/admin/pages/Auth/Login.vue'
 import Roles from '@/views/admin/pages/Roles/Roles.vue'
 import CreateRole from '@/views/admin/pages/CreateRole/CreateRole.vue'
 import ModifyRole from '@/views/admin/pages/ModifyRole/ModifyRole.vue'
+import Permissions from '@/views/admin/pages/Permissions/Permissions.vue'
 
 const adminRouter = [
   {
@@ -77,6 +78,12 @@ const adminRouter = [
         path: "roles/modify/:id",
         name: "ModifyRole",
         component: ModifyRole,
+        meta: { requireAuth: true }
+      },
+      {
+        path: "permissions",
+        name: "Permissions",
+        component: Permissions,
         meta: { requireAuth: true }
       },
     ]
