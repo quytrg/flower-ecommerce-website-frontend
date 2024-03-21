@@ -413,6 +413,7 @@
           this.roles = result.roles.map(item => {
             return {
               _id: item._id,
+              title: item.title,
               permissions: item.permissions,
               changed: false
             }
