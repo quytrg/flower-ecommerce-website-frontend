@@ -93,12 +93,12 @@
                 </td>
                 <td>
                   <div class="d-flex icon">
-                    <!-- <router-link 
-                      :to="{ name: 'ModifyProduct', params: { slug: `${product.slug}`} }"
+                    <router-link 
+                      :to="{ name: 'ModifyRole', params: { id: `${role._id}`} }"
                       class="d-flex align-items-center"
                     >
                       <i class="fa-regular fa-pen-to-square fa-lg fa-fw"></i>
-                    </router-link> -->
+                    </router-link>
                     <div
                       class="ms-2"
                       @click="handleDelete(role._id)"

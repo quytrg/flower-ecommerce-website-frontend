@@ -23,3 +23,9 @@ input {
 }
 /* End input */
 
+/* textarea */
+textarea {
+  color: var(--primary-color) !important;
+}
+/* end textarea */
+
