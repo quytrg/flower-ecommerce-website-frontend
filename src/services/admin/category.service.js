@@ -21,6 +21,18 @@ class CategoryService {
       }
     })).data
   }
+
+  async getOne(id) {
+    return (await this.api.get(`/${id}`)).data;
+  }
+
+  async update(id, formData) {
+    return (await this.api.patch(`/${id}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      }
+    })).data;
+  }
 }
 
 export default new CategoryService();

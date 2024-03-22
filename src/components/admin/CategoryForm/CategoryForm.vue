@@ -170,7 +170,7 @@
       handleSubmit() {
         // get description form tiny-mce
         this.localCategory.description = tinymce.get("description").getContent();
-
+        
         // convert data to formdata
         const formData = objectToFormDataHelper(this.localCategory)
         this.$emit("submit:category", formData)

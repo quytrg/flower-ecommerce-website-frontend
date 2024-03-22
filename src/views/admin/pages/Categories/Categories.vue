@@ -119,8 +119,8 @@
                 </td>
                 <td>
                   <div class="d-flex icon">
-                    <!-- <router-link 
-                      :to="{ name: 'ModifyAccount', params: { id: `${account._id}` } }"
+                    <router-link 
+                      :to="{ name: 'ModifyCategory', params: { id: `${category._id}` } }"
                     >
                       <i class="fa-regular fa-pen-to-square fa-lg fa-fw"></i>
                     </router-link>
@@ -129,7 +129,7 @@
                       @click="handleDelete(account._id)"
                     >
                       <i class="fa-regular fa-trash-can fa-lg fa-fw"></i>
-                    </div> -->
+                    </div>
                   </div>
                 </td>
               </tr>
