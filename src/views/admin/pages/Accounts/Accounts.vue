@@ -331,7 +331,7 @@
       async getAccounts() {
         try {
           const filter = Object.fromEntries(
-            Object.entries(this.filter).filter(([key, value]) => (value !== '' || value !== null))
+            Object.entries(this.filter).filter(([key, value]) => (value !== '' && value !== null))
           );
           const data = await AccountService.get({
             params: {

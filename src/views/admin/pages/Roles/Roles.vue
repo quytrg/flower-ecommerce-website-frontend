@@ -307,7 +307,7 @@
     methods: {
       async getRoles() {
         const filter = Object.fromEntries(
-          Object.entries(this.filter).filter(([key, value]) => (value !== '' || value !== null))
+          Object.entries(this.filter).filter(([key, value]) => (value !== '' && value !== null))
         );
         const data = await roleService.getAll({
           params: {
