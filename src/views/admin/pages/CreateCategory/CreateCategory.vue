@@ -38,6 +38,7 @@
       return {
         category: {
           status: 'active',
+          thumbnails: []
         },
       }
     }
