@@ -101,10 +101,10 @@
             <div class="card-body">
               <h5 class="card-title">Media</h5>
               <div class="mb-3 col-8">
-                <ImageUploadify v-model:cloudURL="localCategory.thumbnail1" fname="thumbnail1" title="Primary thumbnail"/>
+                <ImageUploadify v-model:cloudURL="localCategory.thumbnails[0]" fname="thumbnail" title="Primary thumbnail"/>
               </div>
               <div class="mb-3 col-8">
-                <ImageUploadify v-model:cloudURL="localCategory.thumbnail2" fname="thumbnail2" title="Secondary thumbnail"/>
+                <ImageUploadify v-model:cloudURL="localCategory.thumbnails[1]" fname="thumbnail" title="Secondary thumbnail"/>
               </div>
             </div>
           </div>
@@ -133,7 +133,9 @@
     props: {
       category: {
         type: Object,
-        default: {}
+        default: {
+          thumbnails: []
+        }
       },
       pageTitle: {
         type: String,

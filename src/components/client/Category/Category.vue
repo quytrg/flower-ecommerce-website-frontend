@@ -12,14 +12,14 @@
           </div>
           <div class="category__thumb">
             <router-link :to="{name: 'Products', params: { categoryname: `${item.slug}`}}">
-              <img :src="item.thumbnail1" :alt="item.thumbnail1">
+              <img :src="item.thumbnails[0]" :alt="item.title">
             </router-link>
           </div>
         </div>
         <div class="category__item img-hover-zoom" v-if="index % 2 === 1" :key="index">
           <div class="category__thumb">
             <router-link :to="{name: 'Products', params: { categoryname: `${item.slug}`}}">
-              <img :src="item.thumbnail1" :alt="item.thumbnail1">
+              <img :src="item.thumbnails[0]" :alt="item.title">
             </router-link>
           </div>
           <div class="category__name">

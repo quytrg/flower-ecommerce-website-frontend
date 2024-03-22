@@ -1,7 +1,7 @@
 <template>
   <div class="products fluid-section">
     <div class="products-category grid-wrapper-left relative">
-      <div class="products-category__content content white-text background-image" :style="{ backgroundImage: `url(${category.thumbnail2})`}">
+      <div class="products-category__content content white-text background-image" :style="{ backgroundImage: `url(${category.thumbnail})`}">
         <div class="hoist-text relative">
           <h1>{{ category.title }}</h1>
         </div>
@@ -38,6 +38,8 @@
     methods: {
       async getCategory() {
         this.category = await CategoryService.getCategoryBySlug(this.$route.params.categoryname)
+        // fix error backgroundImage inline
+        this.category.thumbnail = this.category.thumbnails[1]
       },
       async getProducts() {
         this.products = await ProductService.getProductsByCategory(this.$route.params.categoryname)
