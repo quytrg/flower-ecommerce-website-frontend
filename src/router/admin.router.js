@@ -14,6 +14,8 @@ import CreateRole from '@/views/admin/pages/CreateRole/CreateRole.vue'
 import ModifyRole from '@/views/admin/pages/ModifyRole/ModifyRole.vue'
 import Permissions from '@/views/admin/pages/Permissions/Permissions.vue'
 import Categories from '@/views/admin/pages/Categories/Categories.vue'
+import CreateCategory from '@/views/admin/pages/CreateCategory/CreateCategory.vue'
+
 
 const adminRouter = [
   {
@@ -91,6 +93,12 @@ const adminRouter = [
         path: "categories",
         name: "Categories",
         component: Categories,
+        meta: { requireAuth: true }
+      },
+      {
+        path: "categories/create",
+        name: "CreateCategory",
+        component: CreateCategory,
         meta: { requireAuth: true }
       },
     ]

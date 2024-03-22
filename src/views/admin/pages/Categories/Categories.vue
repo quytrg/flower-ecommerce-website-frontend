@@ -43,9 +43,9 @@
           <div class="categories-action d-flex justify-content-between">
             <!-- <ChangeMulti @apply="handleChangeMulti"/> -->
             <div></div>
-            <!-- <router-link :to="{ name: 'CreateAccount' }">
-              <button class="btn btn-main btn-primary">+ New Account</button>
-            </router-link> -->
+            <router-link :to="{ name: 'CreateCategory' }">
+              <button class="btn btn-main btn-primary">+ New Category</button>
+            </router-link>
           </div>
           <table class="table table-sm mt-3">
             <thead>

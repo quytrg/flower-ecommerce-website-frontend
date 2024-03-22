@@ -1,6 +1,6 @@
 <template>
   <div class="imageuploadify-container">
-    <label :for="fname" class="form-label">Image</label>
+    <label :for="fname" class="form-label">{{ title }}</label>
     <Field
       :id="fname"
       :name="fname"
@@ -34,6 +34,10 @@
         default: ''
       },
       cloudURL: null,
+      title: {
+        type: String,
+        default: 'Image'
+      }
     },
     emits: ['update:cloudURL'],
     data() {
