@@ -4,7 +4,7 @@
       <div class="accounts-title my-4 d-flex align-items-center">
         <h4 class="gray-text">Account Settings</h4>
         <h5 class="mx-1">/</h5> 
-        <h4 class="primary-text">Account</h4>
+        <h4 class="primary-text">Accounts</h4>
       </div>
 
       <div class="card mb-3">

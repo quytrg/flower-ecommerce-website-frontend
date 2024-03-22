@@ -4,7 +4,7 @@
       <div class="product-title my-4 d-flex align-items-center">
         <h4 class="gray-text">eCommerce</h4>
         <h5 class="mx-1">/</h5> 
-        <h4 class="primary-text">Product List</h4>
+        <h4 class="primary-text">Products</h4>
       </div>
 
       <div class="card mb-3">
@@ -348,7 +348,6 @@
         const filter = Object.fromEntries(
           Object.entries(this.filter).filter(([key, value]) => (value !== '' && value !== null))
         );
-        console.log(filter)
         const data = await ProductService.get({
           params: {
             ...filter,
@@ -438,7 +437,8 @@
               status: 'active'
             }
           }
-          this.categories = await CategoryService.getAll(filter)
+          const result = await CategoryService.getAll(filter)
+          this.categories = result.categories
         }
         catch(err) {
           console.log(err)

@@ -29,6 +29,7 @@
       async getProduct() {
         this.product = await ProductService.getProductBySlug(this.$route.params.slug)
         const categories = await CategoryService.getCategoriesOfProduct(this.product._id)
+        console.log(categories)
         this.product.categories = categories.map(item => {
           return {
             title: item.title,

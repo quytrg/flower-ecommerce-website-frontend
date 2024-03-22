@@ -46,7 +46,7 @@ export default {
           }
         }
         const result = await CategoryService.getAll(filter)
-        this.categories = result.map(item => {
+        this.categories = result.categories.map(item => {
           return {
             title: item.title,
             _id: item._id
