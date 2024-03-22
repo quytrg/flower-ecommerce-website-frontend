@@ -83,7 +83,7 @@
                 <td>
                   <div class="thumbnail">
                     <img 
-                      :src="category.thumbnail1" 
+                      :src="category.thumbnails[0]" 
                       :alt="category.title"
                     >
                   </div>
