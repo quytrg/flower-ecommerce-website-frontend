@@ -33,7 +33,6 @@
           loadingDialogHelper(
             "Updating category"
           )
-          console.log(data.getAll('thumbnails'));
           await categoryService.update(data.get('_id'), data)
           Swal.close()
           this.$router.push({ name: "Categories" })

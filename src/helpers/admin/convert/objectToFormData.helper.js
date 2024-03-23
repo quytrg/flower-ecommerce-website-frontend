@@ -1,6 +1,6 @@
 const buildFormData = (formData, data, parentKey) => {
   if (data && typeof data === 'object' && !(data instanceof Date) && !(data instanceof File) && !(data instanceof Blob)) {
-    if (Array.isArray(data) && data.every(item => item instanceof File)) {
+    if (Array.isArray(data) && data.every(item => item instanceof File || typeof item === 'string')) {
       data.forEach((file) => {
         formData.append(`${parentKey}`, file);
       });
