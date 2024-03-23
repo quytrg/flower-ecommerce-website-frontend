@@ -126,7 +126,7 @@
                     </router-link>
                     <div
                       class="ms-2"
-                      @click="handleDelete(account._id)"
+                      @click="handleDelete(category._id)"
                     >
                       <i class="fa-regular fa-trash-can fa-lg fa-fw"></i>
                     </div>
@@ -364,20 +364,20 @@
       //   await AccountService.update(account._id, formData)
       //   account.status = changeStatusTo
       // },
-      // async handleDelete(id) {
-      //   try{
-      //     confirmDialogHelper().then(async (result) => {
-      //       if (result.isConfirmed) {
-      //         await AccountService.deleteOne(id)
-      //         this.getAccounts()
-      //         successDialogHelper()
-      //       }
-      //     });
-      //   }
-      //   catch (err) {
-      //     console.log(err)
-      //   }
-      // },
+      async handleDelete(id) {
+        try{
+          confirmDialogHelper().then(async (result) => {
+            if (result.isConfirmed) {
+              await categoryService.deleteOne(id)
+              this.getCategories()
+              successDialogHelper()
+            }
+          });
+        }
+        catch (err) {
+          console.log(err)
+        }
+      },
     },
     created() {
       this.getCategories()

@@ -33,6 +33,10 @@ class CategoryService {
       }
     })).data;
   }
+
+  async deleteOne(id) {
+    return (await this.api.delete(`/${id}`)).data;
+  }
 }
 
 export default new CategoryService();
