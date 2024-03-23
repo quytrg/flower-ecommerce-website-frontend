@@ -357,13 +357,13 @@
           keyword: '',
         }
       },
-      // async handleChangeStatus(account) {
-      //   const changeStatusTo = account.status === 'active' ? 'inactive' : 'active'
-      //   const formData = new FormData()
-      //   formData.append('status', changeStatusTo)
-      //   await AccountService.update(account._id, formData)
-      //   account.status = changeStatusTo
-      // },
+      async handleChangeStatus(category) {
+        const changeStatusTo = category.status === 'active' ? 'inactive' : 'active'
+        const formData = new FormData()
+        formData.append('status', changeStatusTo)
+        await categoryService.update(category._id, formData)
+        category.status = changeStatusTo
+      },
       async handleDelete(id) {
         try{
           confirmDialogHelper().then(async (result) => {
