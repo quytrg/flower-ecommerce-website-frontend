@@ -1,10 +1,13 @@
 <template>
-  <div class="create-product">
+  <div class="create-product" v-if="currentAccount?.permissions.includes('create_products')">
     <ProductForm 
       :product="product"
       @submit:product="createProduct"
       pageTitle="Add Product"
     />
+  </div>
+  <div class="create-product" v-else>
+    <Unauthorized />
   </div>
 </template>
 
@@ -13,10 +16,15 @@
   import ProductService from '@/services/admin/product.service.js'
   import Swal from 'sweetalert2'
   import loadingDialogHelper from '@/helpers/admin/dialogs/loading.helper'
+  import { mapState } from 'pinia'
+  import { useAuthStore } from '@/stores/admin/auth.store'
+  import Unauthorized from '@/components/admin/Unauthorized/Unauthorized.vue'
+
   export default {
     name: "CreateProduct",
     components: {
       ProductForm,
+      Unauthorized,
     },
     methods: {
       async createProduct(data) {
@@ -42,6 +50,9 @@
           thumbnail: null,
         }
       }
+    },
+    computed: {
+      ...mapState(useAuthStore, ['currentAccount'])
     }
   }
 </script>
