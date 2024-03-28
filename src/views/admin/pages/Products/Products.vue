@@ -1,11 +1,26 @@
 <template>
-  <div class="product fluid-container mx-5" v-if="currentAccount?.permissions.includes('read_products')">
-    <div class="is-fetching" v-if="!isFetching">
-      <div class="product-title my-4 d-flex align-items-center">
+  <div class="products fluid-container mx-5" v-if="currentAccount?.permissions.includes('read_products')">
+    <div class="products-wrapper position-relative" v-if="!isFetching">
+      <div class="products-title my-4 d-flex align-items-center">
         <h4 class="gray-text">eCommerce</h4>
         <h5 class="mx-1">/</h5> 
         <h4 class="primary-text">Products</h4>
       </div>
+
+      <Transition class="alert position-absolute top-0 end-0 z-99" name="slide-fade">
+        <v-alert
+          v-model="alert"
+          text="You need permission to perform this action"
+          border-color="warning"
+          color="warning"
+          width="480px"
+          border="start"
+          variant="tonal"
+          density="compact"
+          icon="$warning"
+          closable
+        ></v-alert>
+      </Transition>
 
       <div class="card mb-3">
         <div class="card-header d-flex justify-content-between">
@@ -170,7 +185,7 @@
         </div>
       </div>
     </div>
-    <div class="is-fetching" v-else>
+    <div class="products-wrapper" v-else>
       <v-row>
         <v-col cols="6">
           <v-skeleton-loader
@@ -340,7 +355,8 @@
         checkedItems: [],
         page: 1,
         totalPages: 0,
-        isFetching: true
+        isFetching: true,
+        alert: false
       }
     },
     methods: {
@@ -366,65 +382,89 @@
         }
       },
       async handleChangeStatus(product) {
-        const changeStatusTo = product.status === 'active' ? 'inactive' : 'active'
-        const formData = new FormData()
-        formData.append('status', changeStatusTo)
-        await ProductService.update(product._id, formData)
-        product.status = changeStatusTo
+        if (this.currentAccount?.permissions.includes('update_products')) {
+          const changeStatusTo = product.status === 'active' ? 'inactive' : 'active'
+          const formData = new FormData()
+          formData.append('status', changeStatusTo)
+          await ProductService.update(product._id, formData)
+          product.status = changeStatusTo
+        }
+        else {
+          this.alert = true
+          setTimeout(() => {
+            this.alert = false
+          }, 1200)
+        }
       },
       handleCheckAll() {  
         this.checkedItems = this.products.map(() => this.checkall)
       },
       async handleChangeMulti(type) {
-        const data = {
-          ids: [],
-          positions: [],
-          type
-        }
-        this.checkedItems.map((checked, index) => {
-          if (checked) {
-            data.ids.push(this.products[index]._id)
-            data.positions.push(this.products[index].position) 
+        if (this.currentAccount?.permissions.includes('update_products')) {
+          const data = {
+            ids: [],
+            positions: [],
+            type
           }
-        })
-        
-        if (type !== '') {
-          if (type !== 'position') {
-            delete data.positions
-          }
-          // confirm to delete
-          if (type === 'delete') {
-            const result = await confirmDialogHelper()
-            if (result.isConfirmed) {
+          this.checkedItems.map((checked, index) => {
+            if (checked) {
+              data.ids.push(this.products[index]._id)
+              data.positions.push(this.products[index].position) 
+            }
+          })
+          
+          if (type !== '') {
+            if (type !== 'position') {
+              delete data.positions
+            }
+            // confirm to delete
+            if (type === 'delete') {
+              const result = await confirmDialogHelper()
+              if (result.isConfirmed) {
+                await ProductService.changeMulti(data);
+                successDialogHelper()
+                this.getProducts()
+              }
+            }
+            else {
               await ProductService.changeMulti(data);
-              successDialogHelper()
+              successDialogHelper(
+                "Changed!",
+                "Your product information has been changed"
+              )
               this.getProducts()
             }
           }
-          else {
-            await ProductService.changeMulti(data);
-            successDialogHelper(
-              "Changed!",
-              "Your product information has been changed"
-            )
-            this.getProducts()
-          }
-        }
 
-        // reset checkbox
-        this.checkall = false
-        this.checkedItems = this.products.map(() => false)
+          // reset checkbox
+          this.checkall = false
+          this.checkedItems = this.products.map(() => false)
+        }
+        else {
+          this.alert = true
+          setTimeout(() => {
+            this.alert = false
+          }, 1200)
+        }
       },
 
       async handleDelete(id) {
         try {
-          confirmDialogHelper().then(async (result) => {
-            if (result.isConfirmed) {
-              await ProductService.deleteOne(id)
-              this.getProducts()
-              successDialogHelper()
-            }
-          });
+          if (this.currentAccount?.permissions.includes('delete_products')) {
+            confirmDialogHelper().then(async (result) => {
+              if (result.isConfirmed) {
+                await ProductService.deleteOne(id)
+                this.getProducts()
+                successDialogHelper()
+              }
+            });
+          }
+          else {
+            this.alert = true
+            setTimeout(() => {
+              this.alert = false
+            }, 1200)
+          }
         }
         catch (err) {
           console.log(err)
