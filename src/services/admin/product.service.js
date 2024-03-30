@@ -14,6 +14,10 @@ class ProductService {
     return (await this.api.patch('/change-multi', data)).data
   }
 
+  async changeStatus(id, data) {
+    return (await this.api.patch(`change-status/${id}`, data)).data
+  }
+
   async create(formData) {
     return (await this.api.post('/', formData, {
       headers: {

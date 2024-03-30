@@ -384,9 +384,10 @@
       async handleChangeStatus(product) {
         if (this.currentAccount?.permissions.includes('update_products')) {
           const changeStatusTo = product.status === 'active' ? 'inactive' : 'active'
-          const formData = new FormData()
-          formData.append('status', changeStatusTo)
-          await ProductService.update(product._id, formData)
+          const data = {
+            status: changeStatusTo,
+          }
+          await ProductService.changeStatus(product._id, data)
           product.status = changeStatusTo
         }
         else {
