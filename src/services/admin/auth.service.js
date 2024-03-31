@@ -10,6 +10,10 @@ class AuthService {
     return (await this.api.post("/login", account)).data;
   }
 
+  async logout() {
+    return (await this.api.delete("/logout")).data;
+  }
+
   async getAuth() {
     return (await this.api.get('/me')).data
   }

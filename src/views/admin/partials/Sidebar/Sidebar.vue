@@ -7,6 +7,7 @@
     :profileName="currentAccount?.fullName"
     :profileRole="currentAccount?.roleTitle"
     :profileImg="currentAccount?.avatar"
+    @button-exit-clicked="handleLogout"
   />
 </template>
 
@@ -14,6 +15,8 @@
 import VueSidebarMenuAkahon from "vue-sidebar-menu-akahon";
 import { mapState } from 'pinia'
 import { useAuthStore } from '@/stores/admin/auth.store'
+import authService from '@/services/admin/auth.service.js'
+
 
 export default {
   name: "Sidebar",
@@ -30,6 +33,13 @@ export default {
         { link: { name: 'Dashboard' }, name: 'Orders', tooltip: 'Orders', icon: 'bx-cart-alt' },
         { link: { name: 'Dashboard' }, name: 'Setting', tooltip: 'Setting', icon: 'bx-cog' },
       ],
+    }
+  },
+  methods: {
+    async handleLogout() {
+      await authService.logout()
+      this.$router.push({ name: 'AdminLogin'})
+      location.reload()
     }
   },
   computed: {

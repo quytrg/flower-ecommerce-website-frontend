@@ -79,6 +79,7 @@
               <v-btn
                 variant="text"
                 rounded
+                @click="handleLogout"
               >
                 Log out
               </v-btn>
@@ -93,6 +94,7 @@
 <script>
 import { mapState } from 'pinia'
 import { useAuthStore } from '@/stores/admin/auth.store'
+import authService from '@/services/admin/auth.service.js'
 
 export default {
   name: "Header",
@@ -104,6 +106,13 @@ export default {
   },
   data() {
     return {
+    }
+  },
+  methods: {
+    async handleLogout() {
+      await authService.logout()
+      this.$router.push({ name: 'AdminLogin'})
+      location.reload()
     }
   },
   computed: {
