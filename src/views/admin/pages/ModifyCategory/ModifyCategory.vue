@@ -4,6 +4,7 @@
       v-if="category"
       :category="category"
       @submit:category="updateCategory"
+      pageTitle="Modify Category"
     />
   </div>
 </template>
