@@ -32,7 +32,7 @@
       text-align: center;
       padding: 1.24vw 20vw 4.2vw;
     }
-    background-image: linear-gradient(rgba(18, 18, 18, .35), rgba(18, 18, 18, .35)), url('https://uploads-ssl.webflow.com/6400d82951450021c2d1eb7b/64a0432fd429f309141ad736_!!!!!.webp');
+    background-image: linear-gradient(rgba(18, 18, 18, .35), rgba(18, 18, 18, .35)), url('https://res.cloudinary.com/dszbsfjzs/image/upload/v1712149338/cgfcl08x252ftxpdujdw.webp');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

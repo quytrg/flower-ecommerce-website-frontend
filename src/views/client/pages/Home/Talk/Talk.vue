@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="talk__content grid-wrapper-right">
-      <img class="talk__content--thumb" src="https://uploads-ssl.webflow.com/6400d82951450021c2d1eb7b/64a03b42882782a8aa1f0e26_KYIV%20LB%202%20720.webp" alt="">
+      <img class="talk__content--thumb" src="https://res.cloudinary.com/dszbsfjzs/image/upload/v1712149338/zjwqkabrgwwkdbenyfpx.webp" alt="">
       <div class="talk__social flex-box">
         <h3>Follow us</h3>
         <div class="talk__social--icon">

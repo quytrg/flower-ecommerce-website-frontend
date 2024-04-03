@@ -9,7 +9,7 @@
       <h5>Spread Joy with Our Online Flower Delivery Service</h5>
     </div>
     <div class="brand__quote">
-      <img src="https://uploads-ssl.webflow.com/6400d82951450021c2d1eb7b/64a03d676a877d080695084a_ewddewd%201.webp" alt="a girl is smelling flowers">
+      <img src="https://res.cloudinary.com/dszbsfjzs/image/upload/v1712149337/ap5hdmmgdmwrib1r13my.webp" alt="a girl is smelling flowers">
       <h6>Experience the joy of giving with our modern floral studio. Order online and send fresh flowers, plants and gifts today.</h6>
     </div>
   </div>

@@ -23,7 +23,7 @@
 <style scoped lang="scss">
   .our-service{
     &__thumb {
-      background-image: linear-gradient(rgba(18, 18, 18, .25), rgba(18, 18, 18, .25)), url('https://uploads-ssl.webflow.com/6400d82951450021c2d1eb7b/6436a36c9d977d7032eb51ee_happiness-image-placeholder_lx1a04.webp');
+      background-image: linear-gradient(rgba(18, 18, 18, .25), rgba(18, 18, 18, .25)), url('https://res.cloudinary.com/dszbsfjzs/image/upload/v1712149338/myg060xlvf1i0hgm0uyh.webp');
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
