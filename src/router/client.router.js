@@ -3,6 +3,7 @@ import Home from "@/views/client/pages/Home/Home.vue"
 import Shop from "@/views/client/pages/Shop/Shop.vue"
 import Products from "@/views/client/pages/Products/Products.vue"
 import ProductDetails from "@/views/client/pages/ProductDetails/ProductDetails.vue"
+import Cart from "@/views/client/pages/Cart/Cart.vue"
 
 const clientRouter = [
   {
@@ -32,6 +33,12 @@ const clientRouter = [
         path:"products/:slug",
         name: "ProductDetails",
         component: ProductDetails,
+        meta: { requireAuth: false }
+      },
+      {
+        path:"cart",
+        name: "Cart",
+        component: Cart,
         meta: { requireAuth: false }
       }
     ]

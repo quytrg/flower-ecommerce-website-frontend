@@ -17,7 +17,7 @@
         <h3>{{ product.title }} - ${{ product.price }}</h3>
       </div>
       <div class="product-content__desc">
-        <h5>{{ product.description }}</h5>
+        <h5 v-html="product.description"></h5>
       </div>
       <div class="product-content__quantity">
           <h5>Quantity:</h5>
@@ -27,7 +27,7 @@
             <button @click="handleIncreaseQuantity">+</button>
           </div>
       </div>
-      <Button textContent="ADD TO BASKET" type="dark" :fullWidth="true"/>
+      <Button textContent="ADD TO BASKET" type="dark" :fullWidth="true" @click="handleAddToCart"/>
     </div>
   </div>
 </template>
@@ -36,6 +36,9 @@
   import ProductService from '@/services/client/product.service.js'
   import CategoryService from '@/services/client/category.service.js'
   import Button from '@/components/client/Button/Button.vue'
+  import { useCartStore } from '@/stores/client/cart.store'
+  import { mapActions } from 'pinia'
+
   export default {
     name: "ProductDetails",
     components: {
@@ -63,7 +66,11 @@
         if (this.quantity > 1) {
           this.quantity--
         }
-      }
+      },
+      handleAddToCart() {
+        this.addItem(this.product, this.quantity)
+      },
+      ...mapActions(useCartStore, ['addItem'])
     },
     created() {
       this.getProductDetails()

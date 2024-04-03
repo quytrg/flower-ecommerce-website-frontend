@@ -18,7 +18,7 @@
             <router-link to="/">Sign in</router-link>
           </div>
           <div class="navb-link-wrap__block">
-            <router-link to="/">Cart</router-link>
+            <router-link :to="{ name: 'Cart' }">Cart</router-link>
           </div>
         </div>
       </div>
