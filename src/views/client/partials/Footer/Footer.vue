@@ -101,6 +101,7 @@
         padding: 1.25vw 1.7vw 1.12vw;
         margin-top: 1.24vw;
         margin-bottom: 1.12vw;
+        border: 1px solid black;
       }
     }
   }

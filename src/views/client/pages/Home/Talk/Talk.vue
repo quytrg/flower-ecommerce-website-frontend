@@ -74,6 +74,7 @@
       input {
         flex: 1;
         padding: 1.25vw 1.7vw 1.12vw;
+        border: 1px solid black;
       }
 
       &--input {

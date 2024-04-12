@@ -1,4 +1,4 @@
-const API_PREFIX = 'api'
+const API_PREFIX = 'api-v1'
 const ADMIN_PREFIX = 'admin'
 const CLIENT_PREFIX = 'client'
 

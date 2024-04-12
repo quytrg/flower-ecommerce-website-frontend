@@ -82,12 +82,19 @@
   color: var(--gray);
 }
 
+
+/* input bordor */
 .header-client, .main-client, .footer-client {
   background-color: white;
   color: black !important;
 
-  input {
+  input :not(.cart-address){
     color: black !important;
     border: 1px solid black !important;
   }
+}
+
+/* checkbox bordor */
+.cart-checkbox .v-selection-control__input > .v-icon {
+  opacity: 0.3;
 }

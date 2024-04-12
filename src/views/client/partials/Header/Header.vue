@@ -18,7 +18,11 @@
             <router-link to="/">Sign in</router-link>
           </div>
           <div class="navb-link-wrap__block">
-            <router-link :to="{ name: 'Cart' }">Cart</router-link>
+            <v-badge :content="totalItems" offset-x="-10" offset-y="-3">
+              <div class="">
+                <router-link :to="{ name: 'Cart' }">Cart</router-link>
+              </div>
+            </v-badge>
           </div>
         </div>
       </div>
@@ -27,6 +31,8 @@
 </template>
 
 <script>
+  import { mapState, mapActions } from 'pinia';
+  import { useCartStore } from '@/stores/client/cart.store'
   export default {
     name: "Header",
     data() {
@@ -35,12 +41,21 @@
         // linkFirstTab: this.$route.name !== 'Shop' ? '/category' : '/',
       }
     },
+    methods: {
+      ...mapActions(useCartStore, ['getCart'])
+    },
     computed: {
       firstNavTab() {
         return this.$route.name !== 'Shop' ? 'Shop' : 'Home'
       },
       linkFirstTab() {
         return this.$route.name !== 'Shop' ? '/categories' : '/'
+      },
+      ...mapState(useCartStore, ['totalItems'])
+    },
+    created() {
+      if (!this.totalItems) {
+        this.getCart()
       }
     }
   }
@@ -63,6 +78,8 @@
 
       &--left {
         width: 50%;
+        display: flex;
+        justify-content: start
       }
 
       &--right {
