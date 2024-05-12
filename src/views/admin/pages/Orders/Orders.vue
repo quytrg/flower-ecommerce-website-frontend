@@ -33,11 +33,11 @@
       <div class="card mb-3">
         <div class="card-header d-flex justify-content-between">
           <h5 class="my-2 d-flex align-items-center">Orders</h5>
-          <v-row justify="end" v-if="roles.length">
+          <!-- <v-row justify="end" v-if="roles.length">
             <v-col cols="3">
-              <!-- <Select v-model:selectedValue="filter.roleId" :items="roles" label="Roles"/> -->
+              <Select v-model:selectedValue="filter.roleId" :items="roles" label="Roles"/>
             </v-col>
-          </v-row>
+          </v-row> -->
         </div>
         <div class="card-body">
           <div class="account-action d-flex justify-content-between">
@@ -68,31 +68,44 @@
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody v-if="accounts.length">
-              <tr v-for="account, index in accounts" :key="account._id">
+            <tbody v-if="orders.length">
+              <tr v-for="order, index in orders" :key="order.orderId">
                 <td>
                   <input 
                     class="form-check-input" 
                     type="checkbox"
                     name="id"
-                    :value="account._id"
+                    :value="order.orderId"
                     v-model="checkedItems[index]"
                   >
                 </td>
                 <td>{{ index + 1 }}</td>
-                <td>
-                  <div class="thumbnail">
-                    <img 
-                      :src="account.avatar" 
-                      :alt="account.fullName"
-                    >
-                  </div>
+                <td>#{{ order.orderId }}</td>
+                <td> 
+                  <v-row class="my-3">
+                    <v-col align-self="center" cols="2">
+                      <v-avatar image="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="></v-avatar>
+                    </v-col>
+                    <v-col align-self="center" cols="8" >
+                      <div>{{ order.fullName }}</div>
+                      <div>{{ order.email }}</div>
+                    </v-col>
+                    
+                  </v-row>
                 </td>
-                <td>{{ account.fullName }}</td>
-                <td>{{ getRoleName(account) }}</td>
-                <td>{{ account.email }}</td>
+                <td>{{ getHumanDate(order.createdAt)}}</td>
                 <td>
-                  <button
+                  <v-chip
+                    class="ma-2"
+                    color="cyan"
+                    label
+                  >
+                    {{ order.status }}
+                  </v-chip>
+                  
+                </td>
+                <td>
+                  <!-- <button
                     v-if="account.status === 'active'"
                     class="btn btn-sm btn-success btn-active"
                     @click="handleChangeStatus(account)"
@@ -105,18 +118,19 @@
                     @click="handleChangeStatus(account)"
                   >
                     Inactive
-                  </button>
+                  </button> -->
+                  {{ order.method }}
                 </td>
                 <td>
                   <div class="d-flex icon">
                     <router-link 
-                      :to="{ name: 'ModifyAccount', params: { id: `${account._id}` } }"
+                      :to="{ name: 'ModifyAccount', params: { id: `${sds}` } }"
                     >
                       <i class="fa-regular fa-pen-to-square fa-lg fa-fw"></i>
                     </router-link>
                     <div
                       class="ms-2"
-                      @click="handleDelete(account._id)"
+                      @click="handleDelete()"
                     >
                       <i class="fa-regular fa-trash-can fa-lg fa-fw"></i>
                     </div>
@@ -293,6 +307,7 @@
   // import SelectCategory from '@/components/admin/SelectCategory/SelectCategory.vue'
   // import ChangeMulti from '@/components/admin/ChangeMulti/ChangeMulti.vue'
   import AccountService from '@/services/admin/account.service'
+  import orderService from '@/services/admin/order.service'
   // import RoleService from '@/services/admin/role.service'
   import confirmDialogHelper from '@/helpers/admin/dialogs/confirm.helper.js'
   import successDialogHelper from '@/helpers/admin/dialogs/success.helper.js'
@@ -300,6 +315,7 @@
   import { useAuthStore } from '@/stores/admin/auth.store'
   // import Unauthorized from '@/components/admin/Unauthorized/Unauthorized.vue'
   // import Select from '@/components/admin/Select/Select.vue'
+  import moment from 'moment'
 
   export default {
     name: "Accounts",
@@ -313,12 +329,13 @@
     },
     data() {
       return {
-        accounts: [],
-        roles: [],
+        // accounts: [],
+        orders: [],
+        // roles: [],
         filter: {
-          status: '',
+          // status: '',
           keyword: '',
-          roleId: '',
+          // roleId: '',
         },
         checkall: false,
         checkedItems: [],
@@ -328,86 +345,75 @@
       }
     },
     methods: {
-      async getAccounts() {
+      async getOrders() {
         try {
           const filter = Object.fromEntries(
             Object.entries(this.filter).filter(([key, value]) => (value !== '' && value !== null))
           );
-          const data = await AccountService.get({
+          const data = await orderService.get({
             params: {
               ...filter,
               page: this.page
             }
           })
-          this.accounts = data.accounts
+          this.orders = data.orders
           this.totalPages = data.totalPages
           this.isFetching = false
+          console.log(this.orders)
         }
         catch (err) {
           console.log(err)
         }
       },
-      async getRoles() {
-        try {
-          const data = await RoleService.getAll()
-          this.roles = data.roles
-        }
-        catch (err) {
-          console.log(err)
-        }
-      },
-      getRoleName(account) {
-        const role = this.roles.find(role => role._id === account.roleId)
-        if (role) return role.title
-        else return ''
+      getHumanDate(date) {
+        return moment(date).format('MMMM Do YYYY, h:mm:ss a');
       },
       handleClear() {
         this.filter = {
-          status: '',
+          // status: '',
           keyword: '',
-          roleId: '',
+          // roleId: '',
         }
       },
-      async handleChangeStatus(account) {
-        const changeStatusTo = account.status === 'active' ? 'inactive' : 'active'
-        const formData = new FormData()
-        formData.append('status', changeStatusTo)
-        await AccountService.update(account._id, formData)
-        account.status = changeStatusTo
-      },
-      async handleDelete(id) {
-        try{
-          confirmDialogHelper().then(async (result) => {
-            if (result.isConfirmed) {
-              await AccountService.deleteOne(id)
-              this.getAccounts()
-              successDialogHelper()
-            }
-          });
-        }
-        catch (err) {
-          console.log(err)
-        }
-      },
+      // async handleChangeStatus(account) {
+      //   const changeStatusTo = account.status === 'active' ? 'inactive' : 'active'
+      //   const formData = new FormData()
+      //   formData.append('status', changeStatusTo)
+      //   await AccountService.update(account._id, formData)
+      //   account.status = changeStatusTo
+      // },
+      // async handleDelete(id) {
+      //   try{
+      //     confirmDialogHelper().then(async (result) => {
+      //       if (result.isConfirmed) {
+      //         await AccountService.deleteOne(id)
+      //         this.getAccounts()
+      //         successDialogHelper()
+      //       }
+      //     });
+      //   }
+      //   catch (err) {
+      //     console.log(err)
+      //   }
+      // },
     },
     created() {
-      this.getAccounts(),
-      this.getRoles()
+      this.getOrders()
     },
     watch: {
       filter: {
         handler() {
-          this.getAccounts()
+          this.getOrders()
           this.page = 1
         },
         deep: true
       },
       page() {
-        this.getAccounts()
+        this.getOrders()
       }
     },
     computed: {
-      ...mapState(useAuthStore, ['currentAccount'])
+      // ...mapState(useAuthStore, ['currentAccount'])
     }
   }
 </script>
