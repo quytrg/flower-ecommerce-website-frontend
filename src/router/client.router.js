@@ -4,6 +4,7 @@ import Shop from "@/views/client/pages/Shop/Shop.vue"
 import Products from "@/views/client/pages/Products/Products.vue"
 import ProductDetails from "@/views/client/pages/ProductDetails/ProductDetails.vue"
 import Cart from "@/views/client/pages/Cart/Cart.vue"
+import OrderSuccess from "@/views/client/pages/Orders/Success.vue"
 
 const clientRouter = [
   {
@@ -39,6 +40,12 @@ const clientRouter = [
         path:"cart",
         name: "Cart",
         component: Cart,
+        meta: { requireAuth: false }
+      },
+      {
+        path:"orders/success",
+        name: "OrderSuccess",
+        component: OrderSuccess,
         meta: { requireAuth: false }
       }
     ]

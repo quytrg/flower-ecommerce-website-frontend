@@ -269,6 +269,10 @@
             </tbody>
           </v-table>
         </v-sheet>
+
+        <div class="d-flex justify-content-end mt-2">
+          <v-btn class="my-3 mx-1 text-right" @click="handleCheckout">Check out</v-btn>
+        </div>
       </template>
     </v-stepper>
   </div>
@@ -278,7 +282,9 @@
 <script>
   import { mapState, mapActions } from 'pinia';
   import { useCartStore } from '@/stores/client/cart.store'
+  import { useOrdersStore } from '@/stores/client/orders.store'
   import provinceService from '@/services/client/province.service';
+  import checkoutService from '@/services/client/checkout.service';
 
   export default {
     data: () => ({
@@ -357,7 +363,24 @@
         const ward = await this.wards.find(item => item.ward_id === ward_id)
         this.order.info.ward = await ward
       },
-      ...mapActions(useCartStore, ['getCart', 'removeItem', 'addItem'])
+      async handleCheckout() {
+        this.order.items = this.items.map(item => {
+          return {
+            _id: item.info._id,
+            discountPercentage: item.info.discountPercentage,
+            quantity: item.quantity,
+            price: item.info.price
+          }
+        })
+        this.order.shipping = this.shipping
+        this.order.totalCost = this.totalCost
+        this.order.totalItems = this.totalItems
+        const data = await checkoutService.createOrder(this.order)
+        this.addOrder(data.orderId)
+        this.$router.push({ name: 'OrderSuccess'})
+      },
+      ...mapActions(useCartStore, ['getCart', 'removeItem', 'addItem']),
+      ...mapActions(useOrdersStore, ['addOrder'])
     },
     created() {
       if (!this.totalItems) {
