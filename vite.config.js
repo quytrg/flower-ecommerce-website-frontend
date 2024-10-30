@@ -17,7 +17,7 @@ export default defineConfig({
     port: 3001,
     proxy: {
       "/api-v1": {
-        target: "http://localhost:3000/",
+        target: "https://flower-ecommerce-website-backend.vercel.app/",
         changeOrigin: true,
       },
       "/api": {
