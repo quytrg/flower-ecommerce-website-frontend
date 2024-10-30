@@ -94,7 +94,7 @@ export default {
   props: {},
   data: (vm) => {
     return {
-      email: '',
+      email: 'quy2k3@gmail.com',
       emailRules: [
         value => {
           if (value) return true
@@ -106,7 +106,7 @@ export default {
         },
         value => vm.login(value)
       ],
-      password: '',
+      password: '1',
       passwordRules: [
         value => {
           if (value) return true

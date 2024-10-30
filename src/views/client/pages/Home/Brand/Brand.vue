@@ -1,6 +1,7 @@
 <template>
   <div class="brand">
     <div class="brand__name">
+      <router-link :to="'/admin'" style="color: red;">Link to Administrator Page</router-link>
       <h1>Kyiv</h1>
       <h1>
         LuxeBouquets<sup>®</sup>
